@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إلى Hithem — مفاجأة</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ============ NAV ============ -->
+    <nav class="nav">
+        <div class="nav__brand">
+            <span class="nav__mark"></span>
+            <span class="nav__title">H · المفاجأة</span>
+        </div>
+        <ul class="nav__links">
+            <li><a href="#hero">البداية</a></li>
+            <li><a href="#gallery">المعرض</a></li>
+            <li><a href="#vision">رؤيتنا</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <header id="hero" class="hero">
+        <div class="hero__frame">
+            <div class="hero__corner hero__corner--tl"></div>
+            <div class="hero__corner hero__corner--tr"></div>
+            <div class="hero__corner hero__corner--bl"></div>
+            <div class="hero__corner hero__corner--br"></div>
+
+            <p class="hero__eyebrow">— مشروع خاص · ٢٠٢٦ —</p>
+
+            <h1 class="hero__title">
+                <span id="typewriter" class="typewriter"></span><span class="caret" aria-hidden="true">|</span>
+            </h1>
+
+            <p class="hero__subtitle">كل تفصيلة هنا مرسومة بعناية، مثلما ترسمين أنتِ تفاصيل أيامي.</p>
+
+            <button id="startBtn" class="btn btn--primary" type="button">
+                <span>ابدأ المفاجأة</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" fill="currentColor"/>
+                </svg>
+            </button>
+
+            <div class="hero__scroll" aria-hidden="true">
+                <span></span>
+                <small>اسحبي للأسفل</small>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ GALLERY ============ -->
+    <section id="gallery" class="section">
+        <div class="section__head reveal">
+            <span class="section__index">01</span>
+            <h2 class="section__title">المعرض السينمائي</h2>
+            <p class="section__lede">صور كأنها لوحات معمارية — تكوين، نور، وتوازن.</p>
+        </div>
+
+        <div class="masonry reveal">
+            <figure class="masonry__item masonry__item--tall">
+                <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=900&q=80" alt="معمار حديث" loading="lazy">
+                <div class="masonry__overlay"><span>I · النور</span></div>
+            </figure>
+            <figure class="masonry__item">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80" alt="مبنى زجاجي" loading="lazy">
+                <div class="masonry__overlay"><span>II · الزجاج</span></div>
+            </figure>
+            <figure class="masonry__item masonry__item--wide">
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=80" alt="ممر معماري" loading="lazy">
+                <div class="masonry__overlay"><span>III · العمق</span></div>
+            </figure>
+            <figure class="masonry__item">
+                <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=900&q=80" alt="تفاصيل خرسانية" loading="lazy">
+                <div class="masonry__overlay"><span>IV · الخرسانة</span></div>
+            </figure>
+            <figure class="masonry__item masonry__item--tall">
+                <img src="https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=900&q=80" alt="سلم حلزوني" loading="lazy">
+                <div class="masonry__overlay"><span>V · الحركة</span></div>
+            </figure>
+            <figure class="masonry__item">
+                <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=900&q=80" alt="نوافذ متناظرة" loading="lazy">
+                <div class="masonry__overlay"><span>VI · التماثل</span></div>
+            </figure>
+            <figure class="masonry__item">
+                <img src="https://images.unsplash.com/photo-1481253127861-534b85bf30db?w=900&q=80" alt="عمارة كلاسيكية" loading="lazy">
+                <div class="masonry__overlay"><span>VII · الإرث</span></div>
+            </figure>
+            <figure class="masonry__item masonry__item--wide">
+                <img src="https://images.unsplash.com/photo-1448630360428-65456885c650?w=1200&q=80" alt="منظر معماري" loading="lazy">
+                <div class="masonry__overlay"><span>VIII · الأفق</span></div>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ============ VISION ============ -->
+    <section id="vision" class="section section--vision">
+        <div class="section__head reveal">
+            <span class="section__index">02</span>
+            <h2 class="section__title">رؤيتنا</h2>
+            <p class="section__lede">حيث تلتقي الأرض، والشيفرة، والعمارة.</p>
+        </div>
+
+        <article class="vision-card reveal">
+            <div class="vision-card__grid" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span>
+            </div>
+
+            <div class="vision-card__content">
+                <h3>مشروعنا القادم</h3>
+                <p class="vision-card__lead">
+                    أن نبني معًا شركةً ناشئة تجمع <strong>الهندسة الزراعية</strong>،
+                    و<strong>البرمجة</strong>، و<strong>العمارة</strong> في وحدة واحدة —
+                    حيث ترسمين أنتِ الفضاء، ويُحيي هو الأرض، وأكتب أنا الكود الذي يربطهما.
+                </p>
+
+                <div class="pillars">
+                    <div class="pillar">
+                        <span class="pillar__num">α</span>
+                        <h4>الأرض</h4>
+                        <p>زراعة ذكية مستدامة تُغذّي المدن.</p>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar__num">β</span>
+                        <h4>الكود</h4>
+                        <p>برمجيات تربط البيانات بالحياة.</p>
+                    </div>
+                    <div class="pillar">
+                        <span class="pillar__num">γ</span>
+                        <h4>الفضاء</h4>
+                        <p>عمارة تُترجم القيم إلى مكان.</p>
+                    </div>
+                </div>
+
+                <blockquote class="vision-card__quote">
+                    "أجمل المشاريع تلك التي تبدأ من حلم مشترك."
+                </blockquote>
+            </div>
+        </article>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <div class="footer__line"></div>
+        <p>صُمِّم بحب — لـ <strong>Hithem</strong>.</p>
+        <small>المهندسة التي صمّمت أجمل تفاصيل حياتي.</small>
+    </footer>
+
+    <!-- ============ FLOATING AUDIO BUTTON ============ -->
+    <button id="audioToggle" class="audio-fab" type="button" aria-label="تشغيل / إيقاف الموسيقى">
+        <svg id="iconPlay" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M8 5v14l11-7z" fill="currentColor"/>
+        </svg>
+        <svg id="iconPause" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" style="display:none">
+            <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <!-- ============ PETALS CANVAS ============ -->
+    <canvas id="petals" class="petals" aria-hidden="true"></canvas>
+
+    <!-- ============ HIDDEN YT IFRAME ============ -->
+    <div class="yt-hidden" aria-hidden="true">
+        <iframe id="ytPlayer"
+            src="https://www.youtube.com/embed/eQhEU4hcoz4?enablejsapi=1&controls=0&playsinline=1&rel=0"
+            title="Bombom"
+            frameborder="0"
+            allow="autoplay; encrypted-media"></iframe>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
+</body>
+</html>
