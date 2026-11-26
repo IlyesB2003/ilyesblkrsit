@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="utf-8">
+<title>AI Dev Transfer - مثبّت نقل بيئة الذكاء الاصطناعي</title>
+<hta:application id="oHTA"
+    applicationname="AIDevTransfer"
+    border="thin"
+    caption="yes"
+    icon="assets\app.ico"
+    maximizebutton="no"
+    minimizebutton="yes"
+    scroll="no"
+    singleinstance="yes"
+    contextmenu="no"
+    selection="no"
+    windowstate="normal" />
+<style>
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+body {
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    background: #0b1220;
+    color: #0f172a;
+    font-size: 14px;
+}
+.app { display: table; width: 100%; height: 100%; table-layout: fixed; }
+.sidebar {
+    display: table-cell;
+    width: 248px;
+    height: 100%;
+    padding: 26px 20px 22px 20px;
+    vertical-align: top;
+    color: #e6f6ff;
+    background: linear-gradient(165deg, #07111f 0%, #0b2b3a 58%, #0e7490 100%);
+    position: relative;
+    overflow: hidden;
+}
+.sidebar .glow {
+    position: absolute;
+    width: 230px; height: 230px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.30) 0%, rgba(34,211,238,0) 68%);
+    top: -70px; left: -70px;
+}
+.brand { position: relative; z-index: 2; }
+.logo {
+    width: 52px; height: 52px;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #22d3ee, #0e7490);
+    color: #05202b;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 52px;
+    text-align: center;
+    letter-spacing: 1px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.45);
+    margin-bottom: 14px;
+}
+.brand h1 { font-size: 19px; margin: 0 0 4px 0; letter-spacing: 0.2px; font-weight: 700; }
+.brand p { margin: 0; font-size: 11.5px; color: #9fd8e8; line-height: 1.7; }
+.steps { margin: 34px 0 0 0; padding: 0; list-style: none; position: relative; z-index: 2; }
+.step { position: relative; padding: 0 42px 26px 0; min-height: 24px; color: #7fb4c3; font-size: 12.5px; }
+.step .num {
+    position: absolute; right: 0; top: 0;
+    width: 26px; height: 26px; line-height: 24px;
+    text-align: center; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(255,255,255,0.05);
+    color: #9fd8e8; font-size: 11px; font-weight: 700;
+}
+.step:after {
+    content: ""; position: absolute; right: 12px; top: 27px; bottom: 1px;
+    width: 1px; background: rgba(255,255,255,0.13);
+}
+.step:last-child:after { display: none; }
+.step b { display: block; font-weight: 600; font-size: 13px; color: #cfeef7; margin-bottom: 2px; }
+.step small { color: #6f9dad; font-size: 10.5px; }
+.step.active .num { background: #22d3ee; border-color: #22d3ee; color: #05202b; box-shadow: 0 0 0 5px rgba(34,211,238,0.13); }
+.step.active b { color: #ffffff; }
+.step.done .num { background: rgba(16,185,129,0.16); border-color: #10b981; color: #6ee7b7; }
+.step.done b { color: #a7f3d0; }
+.side-foot {
+    position: absolute; right: 20px; left: 20px; bottom: 20px;
+    border-top: 1px solid rgba(255,255,255,0.13);
+    padding-top: 14px; font-size: 10.5px; line-height: 1.9; color: #78a8b6;
+    z-index: 2;
+}
+.side-foot b { color: #bdeaf4; font-weight: 600; }
+.main { display: table-cell; height: 100%; vertical-align: top; background: #f4f7fb; position: relative; }
+.topbar {
+    position: absolute; top: 0; right: 0; left: 0; height: 58px;
+    background: #ffffff;
+    border-bottom: 1px solid #e3ebf3;
+    padding: 0 30px;
+    line-height: 58px;
+    z-index: 5;
+}
+.topbar .title { font-size: 14px; font-weight: 700; color: #123047; }
+.topbar .right { float: left; font-size: 11px; color: #7b91a5; }
+.badge {
+    display: inline-block; padding: 4px 9px; border-radius: 999px;
+    background: #eef8fb; color: #0e7490; font-size: 10.5px; font-weight: 700;
+    margin-right: 8px; line-height: 1.2;
+}
+.online { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; margin-left: 6px; }
+.online.off { background: #ef4444; }
+.pages {
+    position: absolute; top: 58px; right: 0; left: 0; bottom: 76px;
+    overflow-y: auto; overflow-x: hidden;
+    padding: 26px 32px 22px 32px;
+}
+.page { display: none; }
+.page.active { display: block; }
+.eyebrow { display: inline-block; color: #0e7490; background: #e6f6fa; border-radius: 999px; padding: 4px 10px; font-size: 10.5px; font-weight: 700; margin-bottom: 10px; }
+h2 { font-size: 25px; line-height: 1.35; margin: 0 0 8px 0; color: #0f2b3d; font-weight: 700; letter-spacing: -0.2px; }
+.lead { margin: 0 0 18px 0; color: #5f7488; font-size: 13px; line-height: 1.9; }
+.hero {
+    background: linear-gradient(120deg, #ffffff 0%, #f0fbfd 100%);
+    border: 1px solid #dcecf2;
+    border-radius: 18px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+}
+.hero:after {
+    content: ""; position: absolute; left: -40px; top: -60px;
+    width: 190px; height: 190px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,211,238,0.18) 0%, rgba(34,211,238,0) 70%);
+}
+.hero-inner { position: relative; z-index: 2; }
+.hero h2 { font-size: 27px; }
+.hero .lead { max-width: 560px; margin-bottom: 0; }
+.stats { font-size: 0; margin: 0 -5px 14px -5px; }
+.stat {
+    display: inline-block; vertical-align: top;
+    width: 25%; padding: 0 5px; font-size: 14px;
+}
+.stat-inner {
+    background: #ffffff; border: 1px solid #e2ebf3; border-radius: 13px;
+    padding: 13px 12px; text-align: center;
+    box-shadow: 0 4px 14px rgba(15,42,61,0.04);
+}
+.stat b { display: block; font-size: 24px; color: #0e7490; line-height: 1.1; margin-bottom: 4px; }
+.stat span { color: #6b8093; font-size: 10.5px; }
+.notice {
+    background: #fffaf0; border: 1px solid #fae3b6; border-right: 4px solid #f59e0b;
+    border-radius: 10px; padding: 12px 14px; color: #7a5520; font-size: 11.5px; line-height: 1.9;
+}
+.notice b { color: #8a4b08; }
+.source { color: #8a9bab; font-size: 10.5px; margin-top: 12px; line-height: 1.8; }
+.license-box {
+    background: #ffffff; border: 1px solid #dfe9f1; border-radius: 14px;
+    padding: 16px 20px; height: 292px; overflow-y: auto;
+    font-size: 12px; line-height: 2; color: #40566a;
+}
+.license-box h3 { margin: 0 0 8px 0; font-size: 13px; color: #0f2b3d; }
+.license-box ul { margin: 0; padding-right: 18px; }
+.license-box li { margin-bottom: 7px; }
+.license-box .ok { color: #0f766e; font-weight: 600; }
+.check {
+    display: block; margin-top: 14px; background: #ffffff; border: 1px solid #dbe7ef;
+    border-radius: 11px; padding: 13px 15px; font-size: 12.5px; color: #203a4d;
+    cursor: pointer;
+}
+.check input { width: 17px; height: 17px; vertical-align: middle; margin-left: 8px; }
+.group { background: #ffffff; border: 1px solid #e0eaf2; border-radius: 14px; padding: 14px 18px 8px 18px; margin-bottom: 12px; box-shadow: 0 3px 12px rgba(15,42,61,0.03); }
+.group-head { margin-bottom: 8px; }
+.group-head h3 { margin: 0; font-size: 13.5px; color: #0f2b3d; display: inline-block; }
+.group-head .hint { color: #8a9bab; font-size: 10.5px; margin-right: 8px; }
+.group-head .tools { float: left; font-size: 10px; }
+.group-head .tools a { color: #0e7490; text-decoration: none; margin-right: 8px; cursor: pointer; }
+.item { display: block; padding: 8px 0; border-top: 1px solid #eef3f8; font-size: 12px; cursor: pointer; }
+.group .item:first-of-type { border-top: none; }
+.item input { width: 16px; height: 16px; vertical-align: middle; margin-left: 8px; }
+.item .ibody { display: inline-block; vertical-align: middle; width: 72%; }
+.item .ibody b { display: block; color: #17384d; font-weight: 600; font-size: 12px; }
+.item .ibody small { display: block; color: #8a9bab; font-size: 10px; margin-top: 2px; line-height: 1.5; }
+.item .size { float: left; color: #6b8093; font-size: 10px; background: #f2f7fa; border-radius: 999px; padding: 3px 8px; margin-top: 3px; }
+.item.disabled { opacity: 0.45; }
+.summarybar {
+    background: #ffffff; border: 1px solid #dce8f1; border-radius: 12px;
+    padding: 11px 14px; font-size: 11.5px; color: #526a7e; margin-top: 6px;
+}
+.summarybar b { color: #0e7490; font-size: 14px; }
+.summarybar .warn { color: #b45309; }
+.progress-wrap { background: #ffffff; border: 1px solid #e0eaf2; border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; }
+.progress-top { margin-bottom: 10px; }
+.progress-top .pct { float: left; font-size: 30px; font-weight: 800; color: #0e7490; line-height: 1; }
+.progress-top .pct small { font-size: 13px; font-weight: 600; color: #7b91a5; }
+.progress-top .msg { font-size: 13px; font-weight: 700; color: #17384d; line-height: 1.7; }
+.progress-top .detail { font-size: 10.5px; color: #7b91a5; margin-top: 3px; }
+.bar { height: 16px; background: #e8f0f5; border-radius: 999px; overflow: hidden; border: 1px solid #dbe7ef; }
+.bar-inner {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #0e7490, #22d3ee);
+    background-image: linear-gradient(45deg, rgba(255,255,255,0.18) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.18) 75%, transparent 75%, transparent);
+    background-size: 22px 22px;
+    border-radius: 999px;
+    transition: width 0.5s ease;
+}
+.twocol { font-size: 0; margin: 0 -6px; }
+.col { display: inline-block; vertical-align: top; width: 50%; padding: 0 6px; font-size: 12px; }
+.panel { background: #ffffff; border: 1px solid #e0eaf2; border-radius: 13px; padding: 12px 14px; }
+.panel h4 { margin: 0 0 8px 0; font-size: 11.5px; color: #526a7e; font-weight: 700; }
+.tasklist { height: 248px; overflow-y: auto; }
+.task { padding: 6px 0; border-top: 1px solid #eef3f8; }
+.task:first-child { border-top: none; }
+.task .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; vertical-align: middle; margin-left: 7px; }
+.task .tinfo { display: inline-block; vertical-align: middle; width: 78%; }
+.task .tinfo b { display: block; font-size: 10.5px; color: #2b465a; font-weight: 600; }
+.task .tinfo small { display: block; font-size: 9.5px; color: #8a9bab; margin-top: 1px; }
+.task .tstate { float: left; font-size: 9px; color: #8a9bab; margin-top: 4px; }
+.task.running .dot { background: #f59e0b; }
+.task.running .tstate { color: #b45309; }
+.task.done .dot { background: #10b981; }
+.task.done .tstate { color: #0f766e; }
+.task.error .dot { background: #ef4444; }
+.task.error .tstate { color: #b91c1c; }
+.log {
+    height: 248px; overflow: auto; white-space: pre-wrap;
+    background: #0b1220; color: #a7f3d0; border-radius: 9px;
+    padding: 10px 12px; font-family: Consolas, "Courier New", monospace;
+    font-size: 9.5px; line-height: 1.65; direction: ltr; text-align: left;
+}
+.progress-note { color: #8a9bab; font-size: 10.5px; margin-top: 10px; line-height: 1.8; }
+.cancel-link { color: #b91c1c; font-size: 10.5px; text-decoration: none; cursor: pointer; }
+.center { text-align: center; }
+.finish-icon {
+    width: 82px; height: 82px; line-height: 78px; border-radius: 50%;
+    background: #ecfdf5; border: 2px solid #10b981; color: #059669;
+    font-size: 42px; font-weight: 700; margin: 6px auto 14px auto;
+}
+.finish-icon.err { background: #fef2f2; border-color: #ef4444; color: #dc2626; }
+.finish-title { font-size: 26px; margin: 0 0 6px 0; color: #0f2b3d; }
+.finish-sub { color: #6b8093; font-size: 12px; line-height: 1.9; margin: 0 0 16px 0; }
+.result-cards { font-size: 0; margin: 0 -5px 14px -5px; }
+.result-card { display: inline-block; width: 25%; padding: 0 5px; font-size: 12px; vertical-align: top; }
+.result-inner { background: #ffffff; border: 1px solid #e0eaf2; border-radius: 12px; padding: 12px; text-align: center; }
+.result-inner b { display: block; font-size: 21px; color: #0e7490; margin-bottom: 2px; }
+.result-inner span { color: #7b91a5; font-size: 10px; }
+.pathbox {
+    background: #f8fbfd; border: 1px dashed #cfe0ea; border-radius: 10px;
+    padding: 10px 12px; color: #526a7e; font-size: 10.5px; direction: ltr; text-align: left;
+    word-break: break-all; margin: 10px 0; line-height: 1.7;
+}
+.warnbox { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; border-radius: 10px; padding: 10px 12px; font-size: 10.5px; line-height: 1.8; margin: 10px 0; }
+.footer {
+    position: absolute; right: 0; left: 0; bottom: 0; height: 76px;
+    background: #ffffff; border-top: 1px solid #e3ebf3;
+    padding: 16px 32px; z-index: 6;
+}
+.btn {
+    display: inline-block; border: 0; border-radius: 9px; cursor: pointer;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    font-size: 12.5px; font-weight: 700; padding: 11px 24px; line-height: 1.2;
+    min-width: 104px; text-align: center;
+}
+.btn.primary { background: linear-gradient(135deg, #0e7490, #0891b2); color: #ffffff; box-shadow: 0 7px 16px rgba(14,116,144,0.24); }
+.btn.primary:hover { background: linear-gradient(135deg, #0b5e75, #0e7490); }
+.btn.ghost { background: #f1f6fa; color: #466075; border: 1px solid #dbe7ef; }
+.btn.ghost:hover { background: #e7f0f6; }
+.btn[disabled] { opacity: 0.42; cursor: default; box-shadow: none; }
+.btn.small { padding: 8px 14px; min-width: 0; font-size: 11px; }
+.footer .grow { display: inline-block; }
+.footer .left { float: left; }
+.footer .hint { color: #8a9bab; font-size: 10.5px; line-height: 76px; margin-right: 12px; }
+.footer .actions { float: left; line-height: 44px; }
+.footer .actions .btn { margin-right: 8px; }
+.footer .back { float: right; line-height: 44px; }
+.link { color: #0e7490; text-decoration: none; cursor: pointer; font-weight: 600; }
+.hidden { display: none !important; }
+::-ms-clear { display: none; }
+</style>
+</head>
+<body onload="init()">
+<div class="app">
+  <div class="sidebar">
+    <div class="glow"></div>
+    <div class="brand">
+      <div class="logo">AI</div>
+      <h1>AI Dev Transfer</h1>
+      <p>نقل بيئة الذكاء الاصطناعي<br>من Mac إلى Windows</p>
+    </div>
+    <ul class="steps">
+      <li class="step active" id="s1"><span class="num">1</span><b>مرحباً</b><small>نظرة عامة</small></li>
+      <li class="step" id="s2"><span class="num">2</span><b>الموافقة</b><small>الشروط والتراخيص</small></li>
+      <li class="step" id="s3"><span class="num">3</span><b>المكونات</b><small>اختر ما تريد نقله</small></li>
+      <li class="step" id="s4"><span class="num">4</span><b>التثبيت</b><small>تنزيل وإعداد</small></li>
+      <li class="step" id="s5"><span class="num">5</span><b>الانتهاء</b><small>جاهز للاستخدام</small></li>
+    </ul>
+    <div class="side-foot">
+      <b>Windows 10 / 11 · 64-bit</b><br>
+      يتطلب اتصالاً بالإنترنت<br>
+      مساحة حرة: 42 GB تقريباً
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <span class="title" id="topTitle">نظرة عامة</span>
+      <span class="right"><span class="badge">v1.2.0</span><span id="netDot" class="online"></span><span id="netText">متصل</span></span>
+    </div>
+
+    <div class="pages">
+      <!-- PAGE 1 -->
+      <div class="page active" id="p1">
+        <div class="hero">
+          <div class="hero-inner">
+            <span class="eyebrow">مثبّت نقل ذكي · صغير الحجم</span>
+            <h2>بيئتك الذكية، جاهزة على ويندوز</h2>
+            <p class="lead">مثبّت خفيف يعيد بناء نماذج LLM، محرّك Ollama، لغات البرمجة، وخوادم MCP على حاسوب ويندوز آخر — خطوة بخطوة، من مصادرها الرسمية، وبواجهة عربية بسيطة.</p>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-inner"><b>8</b><span>نماذج LLM</span></div></div>
+          <div class="stat"><div class="stat-inner"><b>32.97</b><span>جيجابايت نماذج</span></div></div>
+          <div class="stat"><div class="stat-inner"><b>45+</b><span>لغة برمجة وأداة</span></div></div>
+          <div class="stat"><div class="stat-inner"><b>6</b><span>خوادم MCP</span></div></div>
+        </div>
+        <div class="notice">
+          <b>المثبّت نفسه صغير جداً.</b> لا يحمل أوزان النماذج داخل الملف؛ بل ينزّلها تلقائياً من Ollama Registry، ويجلب الأدوات من winget والمصادر الرسمية. تحتاج إلى إنترنت ومساحة حرة تقارب <b>60 GB</b> (مع اختيار كل النماذج واللغات).
+        </div>
+        <div class="source">
+          المصدر: MacBook Air M4 · macOS 27.3 · Ollama 0.32.9<br>
+          تم رصد 8 نماذج و9 لغات/أدوات على جهازك، وأُضيفت أكثر من 30 لغة وأداة أخرى (HTML · CSS · JavaScript · TypeScript · C# · Go · Rust · PHP ...)، مع حزمة MCP قابلة للنقل. لا يتم تضمين أي مفاتيح أو أسرار.
+        </div>
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page" id="p2">
+        <span class="eyebrow">الخطوة 2 من 5</span>
+        <h2>الموافقة قبل البدء</h2>
+        <p class="lead">اقرأ الشروط بسرعة. التثبيت يتم على مسؤوليتك، وكل الأدوات تُنزّل من مصادرها الرسمية.</p>
+        <div class="license-box">
+          <h3>شروط الاستخدام والتنزيل</h3>
+          <ul>
+            <li>هذا المثبّت أداة شخصية لنقل بيئة التطوير والذكاء الاصطناعي الخاصة بك إلى حاسوب ويندوز.</li>
+            <li>يتم تنزيل النماذج من <b>Ollama Registry</b>، والأدوات من <b>winget</b> ومواقع Python وNode.js وFlutter وAdoptium وGitHub وغيرها من المصادر الرسمية.</li>
+            <li>أنت مسؤول عن الالتزام بتراخيص النماذج والأدوات التي تختار تثبيتها، وعن توفر مساحة التخزين.</li>
+            <li>لا يرسل هذا المثبّت ملفاتك أو مفاتيحك إلى أي خادم. لا يحتوي على مفاتيح API أو أسرار، ولا يعدّل إعداداتك إلا لإضافة MCP وPATH.</li>
+            <li>قد يستغرق التنزيل من 20 دقيقة إلى عدة ساعات حسب سرعة الإنترنت. لا تغلق نافذة التثبيت أثناء العمل.</li>
+            <li>البرنامج يُقدَّم «كما هو» دون ضمان. جرّبه أولاً على حاسوبك، واحتفظ بنسخة احتياطية من إعداداتك المهمة.</li>
+            <li>يمكنك إلغاء تحديد النماذج أو اللغات لتقليل الحجم. النماذج هي الجزء الأكبر من التنزيل.</li>
+          </ul>
+          <p class="ok">✓ لا يتم تضمين أي بيانات شخصية أو ملفات مشاريع في حزمة المثبّت.</p>
+        </div>
+        <label class="check"><input type="checkbox" id="acceptChk" onchange="updateNav()"> أوافق على الشروط وأريد متابعة التثبيت</label>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page" id="p3">
+        <span class="eyebrow">الخطوة 3 من 5</span>
+        <h2>اختر ما تريد نقله</h2>
+        <p class="lead">كل شيء محدّد افتراضياً. أزل ما لا تحتاجه لتوفير المساحة والوقت.</p>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>البرامج الأساسية</h3><span class="hint">محرّك النماذج وأدوات التشغيل</span>
+            <span class="tools"><a onclick="selectGroup('core', true)">تحديد الكل</a><a onclick="selectGroup('core', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="core" value="ollama" data-size="1954" checked onchange="toggleModels(); calc();"><span class="ibody"><b>Ollama</b><small>محرّك تشغيل نماذج LLM محلياً</small></span><span class="size">1.95 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="core" value="python" data-size="34" checked onchange="calc();"><span class="ibody"><b>Python 3.14</b><small>لغة البرمجة وتشغيل أدوات MCP</small></span><span class="size">34 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="core" value="node" data-size="42" checked onchange="calc();"><span class="ibody"><b>Node.js 26</b><small>لغة JavaScript وتشغيل MCP عبر npx</small></span><span class="size">42 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="core" value="git" data-size="60" checked onchange="calc();"><span class="ibody"><b>Git for Windows</b><small>إدارة الإصدارات وGit Bash</small></span><span class="size">60 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="core" value="uv" data-size="16" checked onchange="calc();"><span class="ibody"><b>uv</b><small>مدير حزم Python سريع وأدوات MCP</small></span><span class="size">16 MB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>نماذج LLM</h3><span class="hint">8 نماذج · 32.97 GB</span>
+            <span class="tools"><a onclick="selectGroup('models', true)">تحديد الكل</a><a onclick="selectGroup('models', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="gemma4:e4b-it-qat" data-size="6150" checked onchange="calc();"><span class="ibody"><b>gemma4:e4b-it-qat</b><small>7.5B · Q4_0 · رؤية وصوت وأدوات</small></span><span class="size">6.15 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="qwen3.5:9b" data-size="6590" checked onchange="calc();"><span class="ibody"><b>qwen3.5:9b</b><small>9.7B · Q4_K_M · رؤية وأدوات وتفكير</small></span><span class="size">6.59 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="moondream:latest" data-size="1740" checked onchange="calc();"><span class="ibody"><b>moondream:latest</b><small>1B · Q4_0 · رؤية</small></span><span class="size">1.74 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="embeddinggemma:latest" data-size="620" checked onchange="calc();"><span class="ibody"><b>embeddinggemma:latest</b><small>307M · BF16 · تضمينات</small></span><span class="size">620 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="qwen3:4b" data-size="2500" checked onchange="calc();"><span class="ibody"><b>qwen3:4b</b><small>4.0B · Q4_K_M · أدوات وتفكير</small></span><span class="size">2.50 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="qwen2.5:14b" data-size="8990" checked onchange="calc();"><span class="ibody"><b>qwen2.5:14b</b><small>14.8B · Q4_K_M · أدوات</small></span><span class="size">8.99 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="bge-m3:latest" data-size="1160" checked onchange="calc();"><span class="ibody"><b>bge-m3:latest</b><small>566M · F16 · تضمينات متعددة اللغات</small></span><span class="size">1.16 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp modelbox" data-group="models" value="qwen3:8b" data-size="5230" checked onchange="calc();"><span class="ibody"><b>qwen3:8b</b><small>8.2B · Q4_K_M · أدوات وتفكير</small></span><span class="size">5.23 GB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>لغات موجودة على جهازك</h3><span class="hint">Java · Dart · Ruby · Perl · C/C++</span>
+            <span class="tools"><a onclick="selectGroup('langs', true)">تحديد الكل</a><a onclick="selectGroup('langs', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="langs" value="java" data-size="220" checked onchange="calc();"><span class="ibody"><b>Java 25 (Temurin)</b><small>JDK لتطوير Java وAndroid</small></span><span class="size">220 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="langs" value="flutter" data-size="1938" checked onchange="calc();"><span class="ibody"><b>Flutter 3.47.8 + Dart</b><small>تطوير تطبيقات الجوال وسطح المكتب</small></span><span class="size">1.94 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="langs" value="ruby" data-size="120" checked onchange="calc();"><span class="ibody"><b>Ruby 3.3</b><small>لغة Ruby وتطبيقاتها</small></span><span class="size">120 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="langs" value="perl" data-size="160" checked onchange="calc();"><span class="ibody"><b>Strawberry Perl</b><small>لغة Perl وأدواتها</small></span><span class="size">160 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="langs" value="gcc" data-size="800" checked onchange="calc();"><span class="ibody"><b>C / C++ (LLVM)</b><small>مترجم Clang وأدوات البناء</small></span><span class="size">800 MB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>تطوير الويب</h3><span class="hint">HTML · CSS · JavaScript · TypeScript</span>
+            <span class="tools"><a onclick="selectGroup('web', true)">تحديد الكل</a><a onclick="selectGroup('web', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="web" value="vscode" data-size="400" checked onchange="calc();"><span class="ibody"><b>Visual Studio Code</b><small>محرّر HTML · CSS · JavaScript مع إضافات لكل اللغات</small></span><span class="size">400 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="web" value="webpack" data-size="150" data-requires="node" checked onchange="calc();"><span class="ibody"><b>Web toolkit (npm)</b><small>TypeScript · Sass · Less · Prettier · ESLint · Live Server · pnpm · Yarn</small></span><span class="size">150 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="web" value="bun" data-size="100" checked onchange="calc();"><span class="ibody"><b>Bun</b><small>تشغيل JavaScript/TypeScript فائق السرعة</small></span><span class="size">100 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="web" value="deno" data-size="120" checked onchange="calc();"><span class="ibody"><b>Deno</b><small>بيئة JavaScript/TypeScript آمنة</small></span><span class="size">120 MB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>لغات الأنظمة</h3><span class="hint">C · C++ · Fortran · Go · Rust · Zig · Nim · Swift</span>
+            <span class="tools"><a onclick="selectGroup('systems', true)">تحديد الكل</a><a onclick="selectGroup('systems', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="vsbuild" data-size="3500" onchange="calc();"><span class="ibody"><b>Visual Studio Build Tools (MSVC)</b><small>مترجم Microsoft · يُضاف تلقائياً مع Swift · يُتخطّى إن كان مثبّتاً</small></span><span class="size">3.42 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="mingw" data-size="600" checked onchange="calc();"><span class="ibody"><b>GCC / G++ / Fortran (WinLibs)</b><small>مترجمات GNU: C · C++ · Fortran</small></span><span class="size">600 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="go" data-size="250" checked onchange="calc();"><span class="ibody"><b>Go</b><small>لغة Go من Google</small></span><span class="size">250 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="rust" data-size="600" checked onchange="calc();"><span class="ibody"><b>Rust (rustup)</b><small>Rust · Cargo (يعمل بدون MSVC عبر GNU)</small></span><span class="size">600 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="zig" data-size="300" checked onchange="calc();"><span class="ibody"><b>Zig</b><small>لغة Zig ومترجم C بديل</small></span><span class="size">300 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="nim" data-size="200" checked onchange="calc();"><span class="ibody"><b>Nim</b><small>لغة Nim السريعة</small></span><span class="size">200 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="swift" data-size="1500" data-requires="vsbuild" onchange="calc();"><span class="ibody"><b>Swift for Windows</b><small>Swift 6 على ويندوز · يضيف MSVC تلقائياً</small></span><span class="size">1.46 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="cmake" data-size="100" checked onchange="calc();"><span class="ibody"><b>CMake</b><small>نظام بناء مشاريع C/C++</small></span><span class="size">100 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="systems" value="ninja" data-size="2" checked onchange="calc();"><span class="ibody"><b>Ninja</b><small>أداة بناء سريعة</small></span><span class="size">2 MB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>.NET و JVM</h3><span class="hint">C# · F# · VB.NET · Kotlin · Scala · Groovy · Clojure · Gradle · Maven</span>
+            <span class="tools"><a onclick="selectGroup('jvm', true)">تحديد الكل</a><a onclick="selectGroup('jvm', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="dotnet" data-size="900" checked onchange="calc();"><span class="ibody"><b>Microsoft .NET SDK 10</b><small>C# · F# · VB.NET · ASP.NET</small></span><span class="size">900 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="kotlin" data-size="90" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Kotlin compiler</b><small>Kotlin من JetBrains (يحتاج Java)</small></span><span class="size">90 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="scala" data-size="60" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Scala CLI</b><small>Scala 3 (يحتاج Java)</small></span><span class="size">60 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="groovy" data-size="50" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Apache Groovy</b><small>Groovy (يحتاج Java)</small></span><span class="size">50 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="gradle" data-size="150" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Gradle</b><small>نظام بناء Java/Kotlin/Android (يحتاج Java)</small></span><span class="size">150 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="maven" data-size="10" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Apache Maven</b><small>إدارة مشاريع Java (يحتاج Java)</small></span><span class="size">10 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="jvm" value="clojure" data-size="80" data-requires="java" checked onchange="calc();"><span class="ibody"><b>Clojure (CLI + Babashka)</b><small>Clojure الرسمي (clj) + Babashka · يحتاج Java</small></span><span class="size">80 MB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>السكربت والبيانات والعلوم</h3><span class="hint">PHP · Lua · SQL · R · Julia · Erlang · Elixir · Lisp · OCaml · Pascal · Haskell</span>
+            <span class="tools"><a onclick="selectGroup('script', true)">تحديد الكل</a><a onclick="selectGroup('script', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="php" data-size="100" checked onchange="calc();"><span class="ibody"><b>PHP 8.5</b><small>PHP لتطوير مواقع الويب</small></span><span class="size">100 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="lua" data-size="5" checked onchange="calc();"><span class="ibody"><b>Lua</b><small>لغة سكربت خفيفة</small></span><span class="size">5 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="pwsh" data-size="110" checked onchange="calc();"><span class="ibody"><b>PowerShell 7</b><small>أحدث إصدار من PowerShell</small></span><span class="size">110 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="sqlite" data-size="10" checked onchange="calc();"><span class="ibody"><b>SQLite</b><small>قاعدة بيانات SQL وأداة sqlite3</small></span><span class="size">10 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="r" data-size="300" checked onchange="calc();"><span class="ibody"><b>R</b><small>الإحصاء وتحليل البيانات</small></span><span class="size">300 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="julia" data-size="900" checked onchange="calc();"><span class="ibody"><b>Julia</b><small>الحوسبة العلمية</small></span><span class="size">900 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="pydata" data-size="450" data-requires="python" checked onchange="calc();"><span class="ibody"><b>Python data science (pip)</b><small>NumPy · Pandas · Matplotlib · SciPy · scikit-learn · JupyterLab</small></span><span class="size">450 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="erlang" data-size="350" checked onchange="calc();"><span class="ibody"><b>Erlang/OTP</b><small>Erlang/OTP</small></span><span class="size">350 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="elixir" data-size="10" data-requires="erlang" checked onchange="calc();"><span class="ibody"><b>Elixir</b><small>Elixir (يحتاج Erlang)</small></span><span class="size">10 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="racket" data-size="500" checked onchange="calc();"><span class="ibody"><b>Racket (Lisp/Scheme)</b><small>Racket · Scheme · Lisp</small></span><span class="size">500 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="ocaml" data-size="900" checked onchange="calc();"><span class="ibody"><b>OCaml (opam)</b><small>OCaml مع مترجم جاهز (opam init تلقائياً · قد يستغرق وقتاً)</small></span><span class="size">900 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="pascal" data-size="300" checked onchange="calc();"><span class="ibody"><b>Free Pascal</b><small>مترجم Pascal / Object Pascal</small></span><span class="size">300 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="script" value="haskell" data-size="1500" checked onchange="calc();"><span class="ibody"><b>Haskell (Stack + GHC)</b><small>Haskell · Stack · GHC (stack setup تلقائياً)</small></span><span class="size">1.46 GB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>أدوات ثقيلة اختيارية</h3><span class="hint">غير محددة افتراضياً</span>
+            <span class="tools"><a onclick="selectGroup('optional', true)">تحديد الكل</a><a onclick="selectGroup('optional', false)">مسح</a></span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="optional" value="rstudio" data-size="900" data-requires="r" onchange="calc();"><span class="ibody"><b>RStudio</b><small>واجهة تطوير لـ R</small></span><span class="size">900 MB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="optional" value="androidstudio" data-size="1300" onchange="calc();"><span class="ibody"><b>Android Studio</b><small>تطوير تطبيقات Android</small></span><span class="size">1.27 GB</span></label>
+          <label class="item"><input type="checkbox" class="comp" data-group="optional" value="docker" data-size="2000" onchange="calc();"><span class="ibody"><b>Docker Desktop</b><small>الحاويات (يحتاج WSL2 وإعادة تشغيل)</small></span><span class="size">1.95 GB</span></label>
+        </div>
+
+        <div class="group">
+          <div class="group-head">
+            <h3>خوادم MCP</h3><span class="hint">حزمة قابلة للنقل · بدون مفاتيح</span>
+          </div>
+          <label class="item"><input type="checkbox" class="comp" data-group="mcp" value="mcp" data-size="20" checked onchange="calc();"><span class="ibody"><b>حزمة MCP الأساسية</b><small>filesystem · memory · sequential-thinking · fetch · git · time</small></span><span class="size">20 MB</span></label>
+        </div>
+
+        <div class="summarybar" id="sumBar">
+          إجمالي التنزيل المحدد: <b id="totalSize">38.5 GB</b>
+          <span id="diskInfo" style="margin-right:10px;color:#8a9bab;">· جارٍ فحص المساحة...</span>
+        </div>
+      </div>
+
+      <!-- PAGE 4 -->
+      <div class="page" id="p4">
+        <span class="eyebrow">الخطوة 4 من 5</span>
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <div class="pct" id="pctText">0<small>%</small></div>
+            <div class="msg" id="progMsg">جارٍ بدء المثبّت...</div>
+            <div class="detail" id="progDetail">يتم تجهيز خطة التثبيت</div>
+          </div>
+          <div class="bar"><div class="bar-inner" id="barInner"></div></div>
+        </div>
+        <div class="twocol">
+          <div class="col"><div class="panel"><h4>المهام</h4><div class="tasklist" id="taskList"></div></div></div>
+          <div class="col"><div class="panel"><h4>آخر الأحداث</h4><div class="log" id="logBox">...</div></div></div>
+        </div>
+        <div class="progress-note">لا تغلق هذه النافذة أثناء التثبيت. قد يستغرق وقتاً طويلاً حسب سرعة الإنترنت. <a class="cancel-link" onclick="cancelInstall()">إلغاء التثبيت</a></div>
+      </div>
+
+      <!-- PAGE 5 -->
+      <div class="page" id="p5">
+        <div class="center">
+          <div class="finish-icon">✓</div>
+          <h2 class="finish-title">اكتمل النقل بنجاح</h2>
+          <p class="finish-sub">تم تجهيز بيئة الذكاء الاصطناعي على ويندوز. أعد تشغيل الجهاز مرة واحدة حتى تظهر أوامر PATH وJAVA_HOME في كل التطبيقات.</p>
+        </div>
+        <div class="result-cards">
+          <div class="result-card"><div class="result-inner"><b id="doneModels">0</b><span>نماذج جاهزة</span></div></div>
+          <div class="result-card"><div class="result-inner"><b id="doneTools">0</b><span>أدوات ولغات</span></div></div>
+          <div class="result-card"><div class="result-inner"><b id="doneMcp">0</b><span>خوادم MCP</span></div></div>
+          <div class="result-card"><div class="result-inner"><b id="doneVerified">0</b><span>لغات تعمل فعلياً</span></div></div>
+        </div>
+        <div class="warnbox hidden" id="finishWarn">توجد بعض التنبيهات. افتح «تقرير الفحص» لترى ما لم يكتمل، ثم أعد تشغيل ويندوز وشغّل المثبّت مرة ثانية: سيتخطّى ما ثُبّت ويعيد محاولة الباقي.</div>
+        <div class="pathbox" id="finishPath">%LOCALAPPDATA%\AI-Dev-Transfer</div>
+        <div class="center" style="margin-top:12px;">
+          <button class="btn ghost small" onclick="openFolder()">فتح مجلد التثبيت</button>
+          <button class="btn ghost small" onclick="openLog()">فتح السجل</button>
+          <button class="btn primary small" onclick="openReport()">تقرير الفحص</button>
+        </div>
+      </div>
+
+      <!-- PAGE 6 -->
+      <div class="page" id="p6">
+        <div class="center">
+          <div class="finish-icon err">!</div>
+          <h2 class="finish-title">توقف التثبيت</h2>
+          <p class="finish-sub" id="errMsg">حدث خطأ غير متوقع.</p>
+        </div>
+        <div class="pathbox" id="errPath">%LOCALAPPDATA%\AI-Dev-Transfer\logs</div>
+        <div class="center">
+          <button class="btn ghost small" onclick="openLog()">فتح السجل</button>
+          <button class="btn primary small" onclick="closeWizard()">إغلاق</button>
+        </div>
+        <div class="warnbox" style="margin-top:14px;">نصيحة: تأكد من اتصال الإنترنت، ومن أن لديك مساحة كافية، ثم أعد تشغيل المثبّت. يمكنك إلغاء تحديد بعض النماذج لتقليل الحجم.</div>
+      </div>
+    </div>
+
+    <div class="footer" id="footer">
+      <div class="back"><button class="btn ghost" id="btnBack" onclick="backPage()">السابق</button></div>
+      <div class="actions">
+        <span class="hint" id="footerHint">لا شيء يُثبَّت قبل موافقتك</span>
+        <button class="btn primary" id="btnNext" onclick="nextPage()">التالي</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script language="javascript">
+var current = 1;
+var rootPath = "";
+var scriptDir = "";
+var statusPath = "";
+var planPath = "";
+var logPath = "";
+var pollTimer = null;
+var started = false;
+var finished = false;
+var lastStatus = null;
+var noStatusTicks = 0;
+
+function sh() { return new ActiveXObject("WScript.Shell"); }
+function fso() { return new ActiveXObject("Scripting.FileSystemObject"); }
+
+function init() {
+    try {
+        window.resizeTo(980, 680);
+        window.moveTo(Math.max(0, (screen.availWidth - 980) / 2), Math.max(0, (screen.availHeight - 680) / 2));
+    } catch (e) {}
+    rootPath = sh().ExpandEnvironmentStrings("%LOCALAPPDATA%") + "\\AI-Dev-Transfer";
+    var href = unescape(location.pathname);
+    if (href.indexOf("file:///") == 0) href = href.substring(8);
+    href = href.replace(/\//g, "\\");
+    if (href.charAt(0) == "\\" && href.charAt(2) == ":") href = href.substring(1);
+    scriptDir = href.substring(0, href.lastIndexOf("\\"));
+    statusPath = rootPath + "\\status.json";
+    planPath = rootPath + "\\plan.json";
+    logPath = rootPath + "\\logs";
+    try {
+        var on = navigator.onLine;
+        document.getElementById("netDot").className = on ? "online" : "online off";
+        document.getElementById("netText").innerHTML = on ? "متصل" : "غير متصل";
+    } catch (e) {}
+    calc();
+    showPage(1);
+    checkAutoTest();
+}
+
+/* Automated test mode (used only by the GitHub Actions Windows test).
+   It is enabled only when %LOCALAPPDATA%\AI-Dev-Transfer\autotest.txt exists;
+   the file is deleted as soon as it is read, so normal users never see it. */
+function checkAutoTest() {
+    var p = rootPath + "\\autotest.txt";
+    try {
+        if (!fso().FileExists(p)) return;
+        var f = fso().OpenTextFile(p, 1, false, 0);
+        var list = f.AtEndOfStream ? "" : f.ReadAll();
+        f.Close();
+        fso().DeleteFile(p);
+        autoTest(list.replace(/^\s+|\s+$/g, ""));
+    } catch (e) {}
+}
+
+function autoTest(list) {
+    window.alert = function () {};
+    window.confirm = function () { return true; };
+    setTimeout(function () { nextPage(); }, 5000);
+    setTimeout(function () {
+        document.getElementById("acceptChk").checked = true;
+        updateNav();
+    }, 9000);
+    setTimeout(function () { nextPage(); }, 12000);
+    setTimeout(function () {
+        if (list) {
+            var want = "," + list + ",";
+            var boxes = document.querySelectorAll(".comp");
+            for (var i = 0; i < boxes.length; i++) {
+                if (boxes[i].value == "ollama") { boxes[i].checked = want.indexOf(",ollama,") >= 0; }
+            }
+            toggleModels();
+            for (var j = 0; j < boxes.length; j++) {
+                if (!boxes[j].disabled) boxes[j].checked = want.indexOf("," + boxes[j].value + ",") >= 0;
+            }
+            calc();
+        }
+    }, 15000);
+    setTimeout(function () { nextPage(); }, 19000);
+}
+
+function showPage(n) {
+    current = n;
+    for (var i = 1; i <= 6; i++) {
+        var el = document.getElementById("p" + i);
+        if (el) el.className = (i == n) ? "page active" : "page";
+    }
+    var titles = ["نظرة عامة", "الموافقة", "اختيار المكونات", "جارٍ التثبيت", "تم بنجاح", "توقف التثبيت"];
+    document.getElementById("topTitle").innerHTML = titles[n - 1];
+    updateSteps(n);
+    var footer = document.getElementById("footer");
+    footer.className = (n >= 4) ? "footer hidden" : "footer";
+    updateNav();
+}
+
+function updateSteps(n) {
+    for (var i = 1; i <= 5; i++) {
+        var el = document.getElementById("s" + i);
+        if (!el) continue;
+        if (n == 6) {
+            el.className = (i < 4) ? "step done" : "step";
+        } else if (i < n) {
+            el.className = "step done";
+        } else if (i == n) {
+            el.className = "step active";
+        } else {
+            el.className = "step";
+        }
+    }
+}
+
+function updateNav() {
+    var back = document.getElementById("btnBack");
+    var next = document.getElementById("btnNext");
+    var hint = document.getElementById("footerHint");
+    if (current == 1) {
+        back.className = "btn ghost hidden";
+        next.className = "btn primary";
+        next.innerHTML = "التالي";
+        next.disabled = false;
+        hint.innerHTML = "لا شيء يُثبَّت قبل موافقتك";
+    } else if (current == 2) {
+        back.className = "btn ghost";
+        next.className = "btn primary";
+        next.innerHTML = "أوافق وأكمل";
+        next.disabled = !document.getElementById("acceptChk").checked;
+        hint.innerHTML = "اقرأ الشروط ثم وافق للمتابعة";
+    } else if (current == 3) {
+        back.className = "btn ghost";
+        next.className = "btn primary";
+        next.innerHTML = "تثبيت الآن";
+        next.disabled = false;
+        hint.innerHTML = "سيبدأ التنزيل فور الضغط";
+    }
+}
+
+function nextPage() {
+    if (current == 1) { showPage(2); return; }
+    if (current == 2) {
+        if (!document.getElementById("acceptChk").checked) { alert("يجب الموافقة على الشروط أولاً."); return; }
+        showPage(3); return;
+    }
+    if (current == 3) { startInstall(); return; }
+}
+
+function backPage() {
+    if (current == 2) { showPage(1); return; }
+    if (current == 3) { showPage(2); return; }
+}
+
+function selectGroup(group, value) {
+    var boxes = document.querySelectorAll(".comp[data-group='" + group + "']");
+    for (var i = 0; i < boxes.length; i++) {
+        if (!boxes[i].disabled) boxes[i].checked = value;
+    }
+    calc();
+}
+
+function toggleModels() {
+    var ollama = null;
+    var all = document.querySelectorAll(".comp");
+    for (var i = 0; i < all.length; i++) { if (all[i].value == "ollama") ollama = all[i]; }
+    if (!ollama) return;
+    var models = document.querySelectorAll(".modelbox");
+    for (var j = 0; j < models.length; j++) {
+        if (!ollama.checked) {
+            models[j].checked = false;
+            models[j].disabled = true;
+        } else {
+            models[j].disabled = false;
+        }
+    }
+    calc();
+}
+
+function calc() {
+    var boxes = document.querySelectorAll(".comp");
+    var mb = 0;
+    var models = 0;
+    for (var i = 0; i < boxes.length; i++) {
+        if (boxes[i].checked) {
+            mb += parseInt(boxes[i].getAttribute("data-size"), 10) || 0;
+            if (boxes[i].getAttribute("data-group") == "models") models++;
+        }
+    }
+    var gb = mb / 1024;
+    var txt = gb >= 1 ? (Math.round(gb * 10) / 10) + " GB" : Math.round(mb) + " MB";
+    var el = document.getElementById("totalSize");
+    if (el) el.innerHTML = txt;
+    var info = document.getElementById("diskInfo");
+    if (info) {
+        try {
+            var free = fso().GetDrive("C").FreeSpace / (1024 * 1024 * 1024);
+            var freeTxt = Math.round(free * 10) / 10;
+            if (free < gb + 4) {
+                info.innerHTML = "· المساحة الحرة " + freeTxt + " GB — قد لا تكفي";
+                info.className = "warn";
+            } else {
+                info.innerHTML = "· المساحة الحرة " + freeTxt + " GB · " + models + " نماذج";
+                info.className = "";
+            }
+        } catch (e) {
+            info.innerHTML = "· تعذّر قراءة المساحة";
+        }
+    }
+}
+
+function mkdirp(path) {
+    var f = fso();
+    var parts = path.split("\\");
+    var cur = parts[0];
+    for (var i = 1; i < parts.length; i++) {
+        if (!parts[i]) continue;
+        cur += "\\" + parts[i];
+        if (!f.FolderExists(cur)) {
+            try { f.CreateFolder(cur); } catch (e) {}
+        }
+    }
+}
+
+function writeText(path, text) {
+    var f = fso();
+    var file = f.CreateTextFile(path, true, false);
+    file.Write(text);
+    file.Close();
+}
+
+function startInstall() {
+    var boxes = document.querySelectorAll(".comp");
+    var comps = [];
+    var models = [];
+    var hasOllama = false;
+    for (var i = 0; i < boxes.length; i++) {
+        if (boxes[i].checked) {
+            comps.push(boxes[i].value);
+            if (boxes[i].value == "ollama") hasOllama = true;
+            if (boxes[i].getAttribute("data-group") == "models") models.push(boxes[i].value);
+        }
+    }
+    var added = [];
+    for (var k = 0; k < boxes.length; k++) {
+        var rq = boxes[k].getAttribute("data-requires");
+        if (boxes[k].checked && rq) {
+            for (var q = 0; q < boxes.length; q++) {
+                if (boxes[q].value == rq && !boxes[q].checked) { boxes[q].checked = true; comps.push(rq); added.push(rq); }
+            }
+        }
+    }
+    if (added.length > 0) { calc(); alert("تمت إضافة مكوّنات مطلوبة تلقائياً: " + added.join(", ")); }
+    if (comps.length == 0) { alert("اختر مكوناً واحداً على الأقل."); return; }
+    if (models.length > 0 && !hasOllama) { alert("لا يمكن تنزيل النماذج بدون Ollama. حدّد Ollama أو أزل النماذج."); return; }
+    try {
+        mkdirp(rootPath);
+        var plan = { components: comps, models: models, created: new Date().toString() };
+        writeText(planPath, JSON.stringify(plan));
+        var cancel = rootPath + "\\cancel.flag";
+        if (fso().FileExists(cancel)) fso().DeleteFile(cancel);
+    } catch (e) {
+        alert("تعذّر تجهيز خطة التثبيت: " + e.message);
+        return;
+    }
+    started = true;
+    finished = false;
+    noStatusTicks = 0;
+    showPage(4);
+    document.getElementById("progMsg").innerHTML = "جارٍ بدء المثبّت...";
+    document.getElementById("progDetail").innerHTML = "يتم تشغيل PowerShell في الخلفية";
+    var ps = sh().ExpandEnvironmentStrings("%SystemRoot%") + "\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+    var cmd = '"' + ps + '" -NoProfile -ExecutionPolicy Bypass -WindowStyle Minimized -File "' + scriptDir + '\\install.ps1"';
+    try {
+        sh().Run(cmd, 7, false);
+    } catch (e) {
+        showError({ message: "تعذّر تشغيل المثبّت: " + e.message, logPath: logPath });
+        return;
+    }
+    pollTimer = setInterval(pollStatus, 800);
+    setTimeout(pollStatus, 1200);
+}
+
+function readUnicode(path) {
+    var f = fso();
+    if (!f.FileExists(path)) return null;
+    try {
+        var file = f.OpenTextFile(path, 1, false, -1);
+        var text = file.ReadAll();
+        file.Close();
+        return text;
+    } catch (e) {
+        return null;
+    }
+}
+
+function pollStatus() {
+    if (!started || finished) return;
+    var text = readUnicode(statusPath);
+    if (!text) {
+        noStatusTicks++;
+        if (noStatusTicks > 20) {
+            document.getElementById("progDetail").innerHTML = "في انتظار بدء PowerShell...";
+        }
+        return;
+    }
+    noStatusTicks = 0;
+    var s = null;
+    try { s = JSON.parse(text); } catch (e) { return; }
+    lastStatus = s;
+    renderStatus(s);
+    if (s.state == "done") {
+        finished = true;
+        clearInterval(pollTimer);
+        renderFinish(s);
+    } else if (s.state == "error") {
+        finished = true;
+        clearInterval(pollTimer);
+        showError(s);
+    } else if (s.state == "cancelled") {
+        finished = true;
+        clearInterval(pollTimer);
+        showError(s);
+    }
+}
+
+function renderStatus(s) {
+    var pct = Math.max(0, Math.min(100, parseFloat(s.percent) || 0));
+    document.getElementById("pctText").innerHTML = Math.round(pct) + "<small>%</small>";
+    document.getElementById("barInner").style.width = pct + "%";
+    if (s.message) document.getElementById("progMsg").innerHTML = esc(s.message);
+    var d = s.detail || "";
+    if (d) document.getElementById("progDetail").innerHTML = esc(d);
+    var jobs = s.tasks || [];
+    var html = "";
+    var stateAr = { pending: "بانتظار", running: "جارٍ", done: "تم", error: "فشل" };
+    for (var i = 0; i < jobs.length; i++) {
+        var t = jobs[i];
+        var cls = t.status || "pending";
+        html += '<div class="task ' + cls + '"><span class="dot"></span><div class="tinfo"><b>' + esc(t.label) + '</b><small>' + esc(t.detail || " ") + '</small></div><span class="tstate">' + (stateAr[cls] || "") + '</span></div>';
+    }
+    document.getElementById("taskList").innerHTML = html || '<div style="color:#8a9bab;font-size:10px;">بانتظار البدء...</div>';
+    if (s.log && s.log.length) {
+        document.getElementById("logBox").innerHTML = esc(s.log.join("\n"));
+        var lb = document.getElementById("logBox");
+        lb.scrollTop = lb.scrollHeight;
+    }
+    if (s.logPath) logPath = s.logPath;
+}
+
+function renderFinish(s) {
+    var sum = s.summary || {};
+    document.getElementById("doneModels").innerHTML = (sum.models || 0) + (sum.models_requested ? " / " + sum.models_requested : "");
+    document.getElementById("doneTools").innerHTML = (sum.tools || 0) + (sum.tools_requested ? " / " + sum.tools_requested : "");
+    document.getElementById("doneMcp").innerHTML = sum.mcp || 0;
+    document.getElementById("doneVerified").innerHTML = (sum.verified || 0) + (sum.missing ? " / " + ((sum.verified || 0) + sum.missing) : "");
+    if (sum.warnings && sum.warnings > 0) document.getElementById("finishWarn").className = "warnbox";
+    else document.getElementById("finishWarn").className = "warnbox hidden";
+    document.getElementById("finishPath").innerHTML = esc(s.root || rootPath);
+    if (s.logPath) logPath = s.logPath;
+    showPage(5);
+    document.getElementById("topTitle").innerHTML = "تم بنجاح";
+}
+
+function showError(s) {
+    finished = true;
+    document.getElementById("errMsg").innerHTML = esc(s.detail || s.message || "حدث خطأ غير متوقع.");
+    document.getElementById("errPath").innerHTML = esc(s.logPath || logPath);
+    if (s.logPath) logPath = s.logPath;
+    showPage(6);
+    var footer = document.getElementById("footer");
+    footer.className = "footer hidden";
+    updateSteps(4);
+}
+
+function cancelInstall() {
+    if (!started || finished) return;
+    if (!confirm("هل تريد إلغاء التثبيت؟ سيتم إيقافه بعد المهمة الحالية.")) return;
+    try {
+        writeText(rootPath + "\\cancel.flag", "1");
+        document.getElementById("progDetail").innerHTML = "جارٍ طلب الإلغاء...";
+    } catch (e) {}
+}
+
+function openFolder() {
+    try { sh().Run('explorer.exe "' + rootPath + '"', 1, false); } catch (e) {}
+}
+
+function openLog() {
+    try {
+        var p = logPath;
+        if (p && fso().FileExists(p)) {
+            sh().Run('notepad.exe "' + p + '"', 1, false);
+        } else {
+            if (!p) p = rootPath + "\\logs";
+            sh().Run('explorer.exe "' + p + '"', 1, false);
+        }
+    } catch (e) {}
+}
+
+function openReport() {
+    try {
+        var p = rootPath + "\\verify-report.txt";
+        if (fso().FileExists(p)) sh().Run('notepad.exe "' + p + '"', 1, false);
+        else openLog();
+    } catch (e) {}
+}
+
+function closeWizard() {
+    try { window.close(); } catch (e) {}
+}
+
+function esc(s) {
+    if (s === null || s === undefined) return "";
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+window.onbeforeunload = function() {
+    if (started && !finished) return "التثبيت ما زال جارياً. إذا أغلقت النافذة فسيستمر في الخلفية.";
+};
+</script>
+</body>
+</html>

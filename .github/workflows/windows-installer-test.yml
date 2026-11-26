@@ -1,0 +1,76 @@
+name: Windows installer test
+
+on:
+  push:
+    branches: [windows-installer-test]
+    paths-ignore: ['ci-results/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: windows-installer-test
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: Static checks + Setup.exe opens
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse script, check winget IDs, run Setup.exe
+        shell: powershell
+        run: ./ci/static-checks.ps1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: results-static, path: results/ }
+
+  install:
+    name: Install - ${{ matrix.name }}
+    runs-on: windows-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: web-systems-jvm
+            components: "python,node,git,uv,java,vscode,webpack,bun,deno,mingw,go,rust,zig,nim,cmake,ninja,gcc,dotnet,kotlin,scala,groovy,gradle,maven,clojure,mcp"
+          - name: scripting-data-mobile
+            components: "python,git,java,ruby,perl,php,lua,pwsh,sqlite,r,julia,pydata,erlang,elixir,racket,ocaml,pascal,haskell,flutter"
+          - name: ollama-models-mcp
+            components: "ollama,embeddinggemma:latest,qwen3:4b,python,node,uv,mcp"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Setup.exe and click through the wizard
+        shell: powershell
+        run: ./ci/run-part.ps1 -Name "${{ matrix.name }}" -Components "${{ matrix.components }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "results-${{ matrix.name }}", path: results/ }
+
+  report:
+    name: Save report to branch
+    needs: [static, install]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: artifacts, pattern: results-*, merge-multiple: true }
+      - name: Commit results
+        run: |
+          rm -rf ci-results && mkdir -p ci-results && cp -r artifacts/* ci-results/ || true
+          {
+            echo "# Windows installer test - run ${GITHUB_RUN_NUMBER}"
+            echo "Commit: ${GITHUB_SHA}  |  $(date -u)"
+            echo
+            for f in ci-results/static/static.md ci-results/*/summary.md; do [ -f "$f" ] && cat "$f" && echo; done
+          } > ci-results/REPORT.md
+          git config user.name "installer-test-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ci-results
+          git commit -m "Windows test results run ${GITHUB_RUN_NUMBER} [skip ci]" || exit 0
+          git pull --rebase origin windows-installer-test || true
+          git push origin HEAD:windows-installer-test

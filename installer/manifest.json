@@ -1,0 +1,1234 @@
+{
+  "schema": 1,
+  "product": "AI Dev Transfer",
+  "version": "1.2.0",
+  "built": "2026-11-26",
+  "source": {
+    "os": "macOS 27.3 (arm64)",
+    "ollama_version": "0.32.9",
+    "models_path": "~/.ollama/models",
+    "models_size_gb": 32.97,
+    "mcp_note": "No standalone MCP servers were configured in Claude/Cursor/Codex. Codex and DSH ship built-in MCP plugins; the installer adds a portable keyless MCP pack instead."
+  },
+  "models": [
+    {
+      "name": "gemma4:e4b-it-qat",
+      "size_gb": 6.15,
+      "parameters": "7.5B",
+      "quantization": "Q4_0",
+      "context": 131072,
+      "capabilities": [
+        "vision",
+        "audio",
+        "tools",
+        "thinking"
+      ],
+      "source_id": "ee6656371218"
+    },
+    {
+      "name": "qwen3.5:9b",
+      "size_gb": 6.59,
+      "parameters": "9.7B",
+      "quantization": "Q4_K_M",
+      "context": 262144,
+      "capabilities": [
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "source_id": "6488c96fa5fa"
+    },
+    {
+      "name": "moondream:latest",
+      "size_gb": 1.74,
+      "parameters": "1B",
+      "quantization": "Q4_0",
+      "context": 2048,
+      "capabilities": [
+        "vision"
+      ],
+      "source_id": "55fc3abd3867"
+    },
+    {
+      "name": "embeddinggemma:latest",
+      "size_gb": 0.62,
+      "parameters": "307.58M",
+      "quantization": "BF16",
+      "context": 2048,
+      "capabilities": [
+        "embedding"
+      ],
+      "source_id": "85462619ee72"
+    },
+    {
+      "name": "qwen3:4b",
+      "size_gb": 2.5,
+      "parameters": "4.0B",
+      "quantization": "Q4_K_M",
+      "context": 262144,
+      "capabilities": [
+        "tools",
+        "thinking"
+      ],
+      "source_id": "359d7dd4bcda"
+    },
+    {
+      "name": "qwen2.5:14b",
+      "size_gb": 8.99,
+      "parameters": "14.8B",
+      "quantization": "Q4_K_M",
+      "context": 32768,
+      "capabilities": [
+        "tools"
+      ],
+      "source_id": "7cdf5a0187d5"
+    },
+    {
+      "name": "bge-m3:latest",
+      "size_gb": 1.16,
+      "parameters": "566.70M",
+      "quantization": "F16",
+      "context": 8192,
+      "capabilities": [
+        "embedding"
+      ],
+      "source_id": "790764642607"
+    },
+    {
+      "name": "qwen3:8b",
+      "size_gb": 5.23,
+      "parameters": "8.2B",
+      "quantization": "Q4_K_M",
+      "context": 40960,
+      "capabilities": [
+        "tools",
+        "thinking"
+      ],
+      "source_id": "500a1f067a9f"
+    }
+  ],
+  "tools": [
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "label_ar": "محرّك Ollama",
+      "winget": [
+        "Ollama.Ollama"
+      ],
+      "fallback": "https://ollama.com/download/OllamaSetup.exe",
+      "size_mb": 1954
+    },
+    {
+      "id": "python",
+      "name": "Python 3.14",
+      "label_ar": "بايثون 3.14",
+      "winget": [
+        "Python.Python.3.14",
+        "Python.Python.3.13",
+        "Python.Python.3.12"
+      ],
+      "fallback": "https://www.python.org/ftp/python/3.14.7/python-3.14.7-amd64.exe",
+      "size_mb": 34,
+      "check": {
+        "exe": [
+          "python"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%LOCALAPPDATA%\\Programs\\Python\\Python3*\\python.exe"
+        ]
+      }
+    },
+    {
+      "id": "node",
+      "name": "Node.js 26",
+      "label_ar": "نود جي إس 26",
+      "winget": [
+        "OpenJS.NodeJS",
+        "OpenJS.NodeJS.LTS"
+      ],
+      "fallback": "https://nodejs.org/dist/v26.13.1/node-v26.13.1-win-x64.zip",
+      "size_mb": 42,
+      "check": {
+        "exe": [
+          "node"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\nodejs\\node.exe"
+        ]
+      }
+    },
+    {
+      "id": "git",
+      "name": "Git for Windows",
+      "label_ar": "جِت",
+      "winget": [
+        "Git.Git"
+      ],
+      "fallback": "",
+      "size_mb": 60,
+      "check": {
+        "exe": [
+          "git"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\Git\\cmd\\git.exe"
+        ]
+      }
+    },
+    {
+      "id": "uv",
+      "name": "uv",
+      "label_ar": "uv (أدوات بايثون)",
+      "winget": [
+        "astral-sh.uv"
+      ],
+      "fallback": "https://github.com/astral-sh/uv/releases/latest/download/uv-x86_64-pc-windows-msvc.zip",
+      "size_mb": 16,
+      "check": {
+        "exe": [
+          "uv"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "java",
+      "name": "Temurin JDK 25",
+      "label_ar": "جافا 25",
+      "winget": [
+        "EclipseAdoptium.Temurin.25.JDK",
+        "EclipseAdoptium.Temurin.21.JDK"
+      ],
+      "fallback": "https://api.adoptium.net/v3/binary/latest/25/ga/windows/x64/jdk/hotspot/normal/eclipse?project=jdk",
+      "size_mb": 220,
+      "check": {
+        "exe": [
+          "java"
+        ],
+        "args": [
+          "-version"
+        ],
+        "find": [
+          "%ProgramFiles%\\Eclipse Adoptium\\jdk-*\\bin\\java.exe"
+        ]
+      }
+    },
+    {
+      "id": "flutter",
+      "name": "Flutter 3.47.8 + Dart 3.13",
+      "label_ar": "فلاتر + دارت",
+      "winget": [],
+      "fallback": "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.47.8-stable.zip",
+      "size_mb": 1938,
+      "check": {
+        "exe": [
+          "flutter.bat",
+          "flutter"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "ruby",
+      "name": "Ruby 3.3",
+      "label_ar": "روبي",
+      "winget": [
+        "RubyInstallerTeam.Ruby.3.3",
+        "RubyInstallerTeam.Ruby.3.4"
+      ],
+      "fallback": "",
+      "size_mb": 120,
+      "check": {
+        "exe": [
+          "ruby"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "C:\\Ruby3*\\bin\\ruby.exe"
+        ]
+      }
+    },
+    {
+      "id": "perl",
+      "name": "Strawberry Perl",
+      "label_ar": "بيرل",
+      "winget": [
+        "StrawberryPerl.StrawberryPerl"
+      ],
+      "fallback": "",
+      "size_mb": 160,
+      "check": {
+        "exe": [
+          "perl"
+        ],
+        "args": [
+          "-v"
+        ],
+        "find": [
+          "C:\\Strawberry\\perl\\bin\\perl.exe"
+        ]
+      }
+    },
+    {
+      "id": "gcc",
+      "name": "LLVM / C++ toolchain",
+      "label_ar": "سي / سي++",
+      "winget": [
+        "LLVM.LLVM",
+        "MSYS2.MSYS2"
+      ],
+      "fallback": "",
+      "size_mb": 800,
+      "check": {
+        "exe": [
+          "clang"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\LLVM\\bin\\clang.exe"
+        ]
+      }
+    },
+    {
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "label_ar": "محرّر VS Code",
+      "desc_ar": "محرّر HTML · CSS · JavaScript مع إضافات لكل اللغات",
+      "winget": [
+        "Microsoft.VisualStudioCode"
+      ],
+      "fallback": "",
+      "size_mb": 400,
+      "group": "web",
+      "default": true,
+      "extensions": [
+        "ritwickdey.LiveServer",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ecmel.vscode-html-css",
+        "formulahendry.auto-rename-tag",
+        "bradlc.vscode-tailwindcss",
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "Dart-Code.flutter",
+        "golang.go",
+        "rust-lang.rust-analyzer",
+        "ms-dotnettools.csharp",
+        "vscjava.vscode-java-pack",
+        "ms-vscode.cpptools",
+        "xdebug.php-debug",
+        "sumneko.lua",
+        "REditorSupport.r",
+        "julialang.language-julia",
+        "ms-vscode.powershell",
+        "mathiasfrohlich.Kotlin",
+        "scalameta.metals",
+        "ocamllabs.ocaml-platform",
+        "JakeBecker.elixir-ls",
+        "nimlang.nimlang",
+        "ziglang.vscode-zig",
+        "sswg.swift-lang",
+        "alexcvzz.vscode-sqlite"
+      ],
+      "check": {
+        "exe": [
+          "code.cmd",
+          "code"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%LOCALAPPDATA%\\Programs\\Microsoft VS Code\\bin\\code.cmd"
+        ]
+      }
+    },
+    {
+      "id": "webpack",
+      "name": "Web toolkit (npm)",
+      "label_ar": "أدوات الويب",
+      "desc_ar": "TypeScript · Sass · Less · Prettier · ESLint · Live Server · pnpm · Yarn",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 150,
+      "group": "web",
+      "default": true,
+      "kind": "npm",
+      "requires": "node",
+      "packages": [
+        "typescript",
+        "tsx",
+        "sass",
+        "less",
+        "prettier",
+        "eslint",
+        "live-server",
+        "http-server",
+        "pnpm",
+        "yarn"
+      ],
+      "check": {
+        "exe": [
+          "tsc.cmd",
+          "tsc"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "bun",
+      "name": "Bun",
+      "label_ar": "Bun",
+      "desc_ar": "تشغيل JavaScript/TypeScript فائق السرعة",
+      "winget": [
+        "Oven-sh.Bun"
+      ],
+      "fallback": "",
+      "size_mb": 100,
+      "group": "web",
+      "default": true,
+      "check": {
+        "exe": [
+          "bun"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "deno",
+      "name": "Deno",
+      "label_ar": "Deno",
+      "desc_ar": "بيئة JavaScript/TypeScript آمنة",
+      "winget": [
+        "DenoLand.Deno"
+      ],
+      "fallback": "",
+      "size_mb": 120,
+      "group": "web",
+      "default": true,
+      "check": {
+        "exe": [
+          "deno"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "vsbuild",
+      "name": "Visual Studio Build Tools (MSVC)",
+      "label_ar": "أدوات MSVC",
+      "desc_ar": "مترجم Microsoft · يُضاف تلقائياً مع Swift · يُتخطّى إن كان مثبّتاً",
+      "winget": [
+        "Microsoft.VisualStudio.2022.BuildTools"
+      ],
+      "fallback": "",
+      "size_mb": 3500,
+      "group": "systems",
+      "default": false,
+      "override": "--wait --quiet --norestart --nocache --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"
+    },
+    {
+      "id": "mingw",
+      "name": "GCC / G++ / Fortran (WinLibs)",
+      "label_ar": "جي سي سي",
+      "desc_ar": "مترجمات GNU: C · C++ · Fortran",
+      "winget": [
+        "BrechtSanders.WinLibs.POSIX.UCRT"
+      ],
+      "fallback": "",
+      "size_mb": 600,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "gcc"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "label_ar": "لغة Go",
+      "desc_ar": "لغة Go من Google",
+      "winget": [
+        "GoLang.Go"
+      ],
+      "fallback": "",
+      "size_mb": 250,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "go"
+        ],
+        "args": [
+          "version"
+        ],
+        "find": [
+          "%ProgramFiles%\\Go\\bin\\go.exe"
+        ]
+      }
+    },
+    {
+      "id": "rust",
+      "name": "Rust (rustup)",
+      "label_ar": "لغة Rust",
+      "desc_ar": "Rust · Cargo (يعمل بدون MSVC عبر GNU)",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 600,
+      "group": "systems",
+      "default": true,
+      "kind": "rustup",
+      "check": {
+        "exe": [
+          "rustc"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%USERPROFILE%\\.cargo\\bin\\rustc.exe"
+        ]
+      }
+    },
+    {
+      "id": "zig",
+      "name": "Zig",
+      "label_ar": "لغة Zig",
+      "desc_ar": "لغة Zig ومترجم C بديل",
+      "winget": [
+        "zig.zig"
+      ],
+      "fallback": "",
+      "size_mb": 300,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "zig"
+        ],
+        "args": [
+          "version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "nim",
+      "name": "Nim",
+      "label_ar": "لغة Nim",
+      "desc_ar": "لغة Nim السريعة",
+      "winget": [
+        "nim.nim"
+      ],
+      "fallback": "",
+      "size_mb": 200,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "nim"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "swift",
+      "name": "Swift for Windows",
+      "label_ar": "لغة Swift",
+      "desc_ar": "Swift 6 على ويندوز · يضيف MSVC تلقائياً",
+      "winget": [
+        "Swift.Toolchain"
+      ],
+      "fallback": "",
+      "size_mb": 1500,
+      "group": "systems",
+      "default": false,
+      "requires": "vsbuild",
+      "check": {
+        "exe": [
+          "swift"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%LOCALAPPDATA%\\Programs\\Swift\\Toolchains\\*\\usr\\bin\\swift.exe"
+        ]
+      }
+    },
+    {
+      "id": "cmake",
+      "name": "CMake",
+      "label_ar": "CMake",
+      "desc_ar": "نظام بناء مشاريع C/C++",
+      "winget": [
+        "Kitware.CMake"
+      ],
+      "fallback": "",
+      "size_mb": 100,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "cmake"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\CMake\\bin\\cmake.exe"
+        ]
+      }
+    },
+    {
+      "id": "ninja",
+      "name": "Ninja",
+      "label_ar": "Ninja",
+      "desc_ar": "أداة بناء سريعة",
+      "winget": [
+        "Ninja-build.Ninja"
+      ],
+      "fallback": "",
+      "size_mb": 2,
+      "group": "systems",
+      "default": true,
+      "check": {
+        "exe": [
+          "ninja"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "dotnet",
+      "name": "Microsoft .NET SDK 10",
+      "label_ar": "دوت نت",
+      "desc_ar": "C# · F# · VB.NET · ASP.NET",
+      "winget": [
+        "Microsoft.DotNet.SDK.10",
+        "Microsoft.DotNet.SDK.9"
+      ],
+      "fallback": "",
+      "size_mb": 900,
+      "group": "jvm",
+      "default": true,
+      "check": {
+        "exe": [
+          "dotnet"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\dotnet\\dotnet.exe"
+        ]
+      }
+    },
+    {
+      "id": "kotlin",
+      "name": "Kotlin compiler",
+      "label_ar": "لغة Kotlin",
+      "desc_ar": "Kotlin من JetBrains (يحتاج Java)",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 90,
+      "group": "jvm",
+      "default": true,
+      "kind": "github",
+      "requires": "java",
+      "github_repo": "JetBrains/kotlin",
+      "asset_pattern": "kotlin-compiler-*.zip",
+      "bin": "kotlinc.bat",
+      "fallback_url": "https://github.com/JetBrains/kotlin/releases/download/v2.2.20/kotlin-compiler-2.2.20.zip",
+      "check": {
+        "exe": [
+          "kotlinc.bat",
+          "kotlinc"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "scala",
+      "name": "Scala CLI",
+      "label_ar": "لغة Scala",
+      "desc_ar": "Scala 3 (يحتاج Java)",
+      "winget": [
+        "VirtusLab.ScalaCLI"
+      ],
+      "fallback": "",
+      "size_mb": 60,
+      "group": "jvm",
+      "default": true,
+      "requires": "java",
+      "check": {
+        "exe": [
+          "scala-cli"
+        ],
+        "args": [
+          "version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "groovy",
+      "name": "Apache Groovy",
+      "label_ar": "لغة Groovy",
+      "desc_ar": "Groovy (يحتاج Java)",
+      "winget": [
+        "Apache.Groovy.4"
+      ],
+      "fallback": "",
+      "size_mb": 50,
+      "group": "jvm",
+      "default": true,
+      "requires": "java",
+      "check": {
+        "exe": [
+          "groovy.bat",
+          "groovy"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "gradle",
+      "name": "Gradle",
+      "label_ar": "Gradle",
+      "desc_ar": "نظام بناء Java/Kotlin/Android (يحتاج Java)",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 150,
+      "group": "jvm",
+      "default": true,
+      "requires": "java",
+      "kind": "gradle",
+      "check": {
+        "exe": [
+          "gradle.bat",
+          "gradle"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "maven",
+      "name": "Apache Maven",
+      "label_ar": "Maven",
+      "desc_ar": "إدارة مشاريع Java (يحتاج Java)",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 10,
+      "group": "jvm",
+      "default": true,
+      "requires": "java",
+      "kind": "maven",
+      "check": {
+        "exe": [
+          "mvn.cmd",
+          "mvn"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "clojure",
+      "name": "Clojure (CLI + Babashka)",
+      "label_ar": "Clojure",
+      "desc_ar": "Clojure الرسمي (clj) + Babashka · يحتاج Java",
+      "winget": [
+        "Babashka.Babashka"
+      ],
+      "fallback": "",
+      "size_mb": 80,
+      "group": "jvm",
+      "default": true,
+      "requires": "java",
+      "kind": "clojure",
+      "check": {
+        "exe": [
+          "bb"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "php",
+      "name": "PHP 8.5",
+      "label_ar": "لغة PHP",
+      "desc_ar": "PHP لتطوير مواقع الويب",
+      "winget": [
+        "PHP.PHP.8.5",
+        "PHP.PHP.8.4"
+      ],
+      "fallback": "",
+      "size_mb": 100,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "php"
+        ],
+        "args": [
+          "-v"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "lua",
+      "name": "Lua",
+      "label_ar": "لغة Lua",
+      "desc_ar": "لغة سكربت خفيفة",
+      "winget": [
+        "DEVCOM.Lua"
+      ],
+      "fallback": "",
+      "size_mb": 5,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "lua",
+          "lua54"
+        ],
+        "args": [],
+        "find": [
+          "%ProgramFiles%\\Lua\\lua.exe",
+          "%ProgramFiles(x86)%\\Lua\\lua.exe"
+        ]
+      }
+    },
+    {
+      "id": "pwsh",
+      "name": "PowerShell 7",
+      "label_ar": "باورشيل 7",
+      "desc_ar": "أحدث إصدار من PowerShell",
+      "winget": [
+        "Microsoft.PowerShell"
+      ],
+      "fallback": "",
+      "size_mb": 110,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "pwsh"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\PowerShell\\7\\pwsh.exe"
+        ]
+      }
+    },
+    {
+      "id": "sqlite",
+      "name": "SQLite",
+      "label_ar": "SQL / SQLite",
+      "desc_ar": "قاعدة بيانات SQL وأداة sqlite3",
+      "winget": [
+        "SQLite.SQLite"
+      ],
+      "fallback": "",
+      "size_mb": 10,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "sqlite3"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "r",
+      "name": "R",
+      "label_ar": "لغة R",
+      "desc_ar": "الإحصاء وتحليل البيانات",
+      "winget": [
+        "RProject.R"
+      ],
+      "fallback": "",
+      "size_mb": 300,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "Rscript"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\R\\R-*\\bin\\Rscript.exe"
+        ]
+      }
+    },
+    {
+      "id": "julia",
+      "name": "Julia",
+      "label_ar": "لغة Julia",
+      "desc_ar": "الحوسبة العلمية",
+      "winget": [
+        "Julialang.Julia"
+      ],
+      "fallback": "",
+      "size_mb": 900,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "julia"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%LOCALAPPDATA%\\Programs\\Julia*\\bin\\julia.exe",
+          "%ProgramFiles%\\Julia*\\bin\\julia.exe"
+        ]
+      }
+    },
+    {
+      "id": "pydata",
+      "name": "Python data science (pip)",
+      "label_ar": "علوم البيانات",
+      "desc_ar": "NumPy · Pandas · Matplotlib · SciPy · scikit-learn · JupyterLab",
+      "winget": [],
+      "fallback": "",
+      "size_mb": 450,
+      "group": "script",
+      "default": true,
+      "kind": "pip",
+      "requires": "python",
+      "packages": [
+        "numpy",
+        "pandas",
+        "matplotlib",
+        "scipy",
+        "scikit-learn",
+        "jupyterlab",
+        "requests"
+      ],
+      "check": {
+        "exe": [
+          "jupyter"
+        ],
+        "args": [],
+        "find": [
+          "%LOCALAPPDATA%\\Programs\\Python\\Python3*\\Scripts\\jupyter.exe"
+        ]
+      }
+    },
+    {
+      "id": "erlang",
+      "name": "Erlang/OTP",
+      "label_ar": "لغة Erlang",
+      "desc_ar": "Erlang/OTP",
+      "winget": [
+        "Erlang.ErlangOTP"
+      ],
+      "fallback": "",
+      "size_mb": 350,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "erl"
+        ],
+        "args": [],
+        "find": [
+          "%ProgramFiles%\\Erlang OTP\\bin\\erl.exe",
+          "%ProgramFiles%\\erl-*\\bin\\erl.exe"
+        ]
+      }
+    },
+    {
+      "id": "elixir",
+      "name": "Elixir",
+      "label_ar": "لغة Elixir",
+      "desc_ar": "Elixir (يحتاج Erlang)",
+      "winget": [
+        "Elixir.Elixir"
+      ],
+      "fallback": "",
+      "size_mb": 10,
+      "group": "script",
+      "default": true,
+      "requires": "erlang",
+      "check": {
+        "exe": [
+          "elixir.bat",
+          "elixir"
+        ],
+        "args": [],
+        "find": [
+          "%ProgramFiles(x86)%\\Elixir\\bin\\elixir.bat",
+          "%ProgramFiles%\\Elixir\\bin\\elixir.bat"
+        ]
+      }
+    },
+    {
+      "id": "racket",
+      "name": "Racket (Lisp/Scheme)",
+      "label_ar": "Racket",
+      "desc_ar": "Racket · Scheme · Lisp",
+      "winget": [
+        "Racket.Racket"
+      ],
+      "fallback": "",
+      "size_mb": 500,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "racket"
+        ],
+        "args": [],
+        "find": [
+          "%ProgramFiles%\\Racket\\racket.exe"
+        ]
+      }
+    },
+    {
+      "id": "ocaml",
+      "name": "OCaml (opam)",
+      "label_ar": "OCaml",
+      "desc_ar": "OCaml مع مترجم جاهز (opam init تلقائياً · قد يستغرق وقتاً)",
+      "winget": [
+        "OCaml.opam"
+      ],
+      "fallback": "",
+      "size_mb": 900,
+      "group": "script",
+      "default": true,
+      "post": [
+        [
+          "opam",
+          "init",
+          "--yes",
+          "--cygwin-internal-install"
+        ]
+      ],
+      "check": {
+        "exe": [
+          "opam"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": []
+      }
+    },
+    {
+      "id": "pascal",
+      "name": "Free Pascal",
+      "label_ar": "باسكال",
+      "desc_ar": "مترجم Pascal / Object Pascal",
+      "winget": [
+        "FreePascal.FreePascalCompiler"
+      ],
+      "fallback": "",
+      "size_mb": 300,
+      "group": "script",
+      "default": true,
+      "check": {
+        "exe": [
+          "fpc"
+        ],
+        "args": [],
+        "find": [
+          "C:\\FPC\\*\\bin\\*\\fpc.exe"
+        ]
+      }
+    },
+    {
+      "id": "haskell",
+      "name": "Haskell (Stack + GHC)",
+      "label_ar": "Haskell",
+      "desc_ar": "Haskell · Stack · GHC (stack setup تلقائياً)",
+      "winget": [
+        "commercialhaskell.stack"
+      ],
+      "fallback": "",
+      "size_mb": 1500,
+      "group": "script",
+      "default": true,
+      "post": [
+        [
+          "stack",
+          "setup"
+        ]
+      ],
+      "check": {
+        "exe": [
+          "stack"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%APPDATA%\\local\\bin\\stack.exe"
+        ]
+      }
+    },
+    {
+      "id": "rstudio",
+      "name": "RStudio",
+      "label_ar": "RStudio",
+      "desc_ar": "واجهة تطوير لـ R",
+      "winget": [
+        "Posit.RStudio"
+      ],
+      "fallback": "",
+      "size_mb": 900,
+      "group": "optional",
+      "default": false,
+      "requires": "r",
+      "check": {
+        "exe": [
+          "rstudio"
+        ],
+        "args": [],
+        "find": []
+      }
+    },
+    {
+      "id": "androidstudio",
+      "name": "Android Studio",
+      "label_ar": "أندرويد ستوديو",
+      "desc_ar": "تطوير تطبيقات Android",
+      "winget": [
+        "Google.AndroidStudio"
+      ],
+      "fallback": "",
+      "size_mb": 1300,
+      "group": "optional",
+      "default": false
+    },
+    {
+      "id": "docker",
+      "name": "Docker Desktop",
+      "label_ar": "Docker",
+      "desc_ar": "الحاويات (يحتاج WSL2 وإعادة تشغيل)",
+      "winget": [
+        "Docker.DockerDesktop"
+      ],
+      "fallback": "",
+      "size_mb": 2000,
+      "group": "optional",
+      "default": false,
+      "check": {
+        "exe": [
+          "docker"
+        ],
+        "args": [
+          "--version"
+        ],
+        "find": [
+          "%ProgramFiles%\\Docker\\Docker\\resources\\bin\\docker.exe"
+        ]
+      }
+    }
+  ],
+  "mcp": [
+    {
+      "id": "filesystem",
+      "name": "Filesystem",
+      "kind": "npm",
+      "package": "@modelcontextprotocol/server-filesystem",
+      "args": []
+    },
+    {
+      "id": "memory",
+      "name": "Memory",
+      "kind": "npm",
+      "package": "@modelcontextprotocol/server-memory",
+      "args": []
+    },
+    {
+      "id": "sequential-thinking",
+      "name": "Sequential Thinking",
+      "kind": "npm",
+      "package": "@modelcontextprotocol/server-sequential-thinking",
+      "args": []
+    },
+    {
+      "id": "fetch",
+      "name": "Fetch",
+      "kind": "python",
+      "package": "mcp-server-fetch",
+      "args": []
+    },
+    {
+      "id": "git",
+      "name": "Git",
+      "kind": "python",
+      "package": "mcp-server-git",
+      "args": []
+    },
+    {
+      "id": "time",
+      "name": "Time",
+      "kind": "python",
+      "package": "mcp-server-time",
+      "args": []
+    }
+  ],
+  "requirements": {
+    "min_windows": "10.0.17763",
+    "min_disk_gb_with_models": 60,
+    "internet": true
+  }
+}

@@ -1,0 +1,387 @@
+{
+  "generated": "2026-11-26T09:25:00+01:00",
+  "source_machine": {
+    "model": "MacBook Air (Apple M4, arm64)",
+    "os": "macOS 27.3"
+  },
+  "llm_runtime": {
+    "name": "Ollama",
+    "version": "0.32.9",
+    "model_store": "~/.ollama/models",
+    "model_store_size_gb": 32.97,
+    "model_count": 8,
+    "other_runtimes_found": [],
+    "notes": [
+      "No LM Studio, GPT4All, Jan, llama.cpp or Hugging Face cache was found.",
+      "All 8 models are registry models and can be restored with `ollama pull`."
+    ]
+  },
+  "models": [
+    {
+      "name": "gemma4:e4b-it-qat",
+      "size_gb": 6.15,
+      "parameters": "7.5B",
+      "quantization": "Q4_0",
+      "capabilities": [
+        "vision",
+        "audio",
+        "tools",
+        "thinking"
+      ]
+    },
+    {
+      "name": "qwen3.5:9b",
+      "size_gb": 6.59,
+      "parameters": "9.7B",
+      "quantization": "Q4_K_M",
+      "capabilities": [
+        "vision",
+        "tools",
+        "thinking"
+      ]
+    },
+    {
+      "name": "moondream:latest",
+      "size_gb": 1.74,
+      "parameters": "1B",
+      "quantization": "Q4_0",
+      "capabilities": [
+        "vision"
+      ]
+    },
+    {
+      "name": "embeddinggemma:latest",
+      "size_gb": 0.62,
+      "parameters": "307.58M",
+      "quantization": "BF16",
+      "capabilities": [
+        "embedding"
+      ]
+    },
+    {
+      "name": "qwen3:4b",
+      "size_gb": 2.5,
+      "parameters": "4.0B",
+      "quantization": "Q4_K_M",
+      "capabilities": [
+        "tools",
+        "thinking"
+      ]
+    },
+    {
+      "name": "qwen2.5:14b",
+      "size_gb": 8.99,
+      "parameters": "14.8B",
+      "quantization": "Q4_K_M",
+      "capabilities": [
+        "tools"
+      ]
+    },
+    {
+      "name": "bge-m3:latest",
+      "size_gb": 1.16,
+      "parameters": "566.70M",
+      "quantization": "F16",
+      "capabilities": [
+        "embedding"
+      ]
+    },
+    {
+      "name": "qwen3:8b",
+      "size_gb": 5.23,
+      "parameters": "8.2B",
+      "quantization": "Q4_K_M",
+      "capabilities": [
+        "tools",
+        "thinking"
+      ]
+    }
+  ],
+  "programming_languages": [
+    {
+      "name": "Python",
+      "version": "3.14.7",
+      "source": "Homebrew",
+      "windows_target": "Python 3.14"
+    },
+    {
+      "name": "Node.js",
+      "version": "26.13.1",
+      "source": "Homebrew",
+      "windows_target": "Node.js 26"
+    },
+    {
+      "name": "Dart",
+      "version": "3.13.7",
+      "source": "Flutter SDK 3.47.8",
+      "windows_target": "Flutter 3.47.8 + Dart"
+    },
+    {
+      "name": "Java",
+      "version": "OpenJDK 25.0.4",
+      "source": "Android Studio JetBrains Runtime",
+      "windows_target": "Temurin JDK 25"
+    },
+    {
+      "name": "Ruby",
+      "version": "2.6.10",
+      "source": "macOS system Ruby",
+      "windows_target": "Ruby 3.3"
+    },
+    {
+      "name": "Perl",
+      "version": "5.34.1",
+      "source": "macOS system Perl",
+      "windows_target": "Strawberry Perl"
+    },
+    {
+      "name": "Swift",
+      "version": "6.4.2",
+      "source": "Xcode Command Line Tools",
+      "windows_target": "not included (Apple-only workflow)"
+    },
+    {
+      "name": "C / C++",
+      "version": "Apple clang 21.0.0",
+      "source": "Xcode Command Line Tools",
+      "windows_target": "LLVM / C++ toolchain"
+    },
+    {
+      "name": "SQL",
+      "version": "SQLite 3.54.0",
+      "source": "Homebrew",
+      "windows_target": "included with Python / Git"
+    }
+  ],
+  "not_detected": [
+    "Go",
+    "Rust",
+    "PHP",
+    "C# / .NET SDK",
+    "Kotlin CLI",
+    "Lua",
+    "R",
+    "Julia",
+    "Zig",
+    "Bun",
+    "Deno",
+    "pnpm",
+    "Yarn"
+  ],
+  "developer_tools": [
+    {
+      "name": "Git",
+      "version": "2.55.0"
+    },
+    {
+      "name": "uv",
+      "version": "0.12.3"
+    },
+    {
+      "name": "Ollama",
+      "version": "0.32.9"
+    },
+    {
+      "name": "Android Studio",
+      "note": "installed cask, includes JDK 25"
+    },
+    {
+      "name": "Visual Studio Code",
+      "note": "with Python, Jupyter, Java, C/C++, C#, PowerShell and AI extensions"
+    },
+    {
+      "name": "Docker",
+      "note": "installed app"
+    }
+  ],
+  "mcp": {
+    "standalone_servers_configured": 0,
+    "claude_desktop": "No mcpServers block in claude_desktop_config.json",
+    "claude_code": "No global or project mcpServers in ~/.claude.json",
+    "cursor": "No mcp.json",
+    "gemini": "mcp_config.json is empty",
+    "codex": [
+      "node_repl (internal, macOS app path)",
+      "computer-use (disabled, macOS app path)",
+      "bundled Codex plugins: browser, documents, pdf, spreadsheets, presentations, template-creator, google-calendar, slack, chrome, codex-app-tools, unified-computer-use"
+    ],
+    "dsh": "No MCP configuration in the DSH profile; DSH plugins are DSH-native, not portable MCP servers",
+    "portable_pack_added": [
+      "filesystem",
+      "memory",
+      "sequential-thinking",
+      "fetch",
+      "git",
+      "time"
+    ]
+  },
+  "installer": {
+    "strategy": "small internet bootstrap, no model weights bundled",
+    "models_downloaded_from": "Ollama registry (registry.ollama.ai)",
+    "tools_downloaded_from": "winget and official vendor URLs",
+    "estimated_download_gb": 51.2,
+    "estimated_disk_gb": 42
+  },
+  "windows_added_languages": [
+    {
+      "id": "vscode",
+      "name": "Visual Studio Code",
+      "default": true
+    },
+    {
+      "id": "webpack",
+      "name": "Web toolkit (npm)",
+      "default": true
+    },
+    {
+      "id": "bun",
+      "name": "Bun",
+      "default": true
+    },
+    {
+      "id": "deno",
+      "name": "Deno",
+      "default": true
+    },
+    {
+      "id": "vsbuild",
+      "name": "Visual Studio Build Tools (MSVC)",
+      "default": true
+    },
+    {
+      "id": "mingw",
+      "name": "GCC / G++ / Fortran (WinLibs)",
+      "default": true
+    },
+    {
+      "id": "go",
+      "name": "Go",
+      "default": true
+    },
+    {
+      "id": "rust",
+      "name": "Rust (rustup)",
+      "default": true
+    },
+    {
+      "id": "zig",
+      "name": "Zig",
+      "default": true
+    },
+    {
+      "id": "nim",
+      "name": "Nim",
+      "default": true
+    },
+    {
+      "id": "swift",
+      "name": "Swift for Windows",
+      "default": true
+    },
+    {
+      "id": "cmake",
+      "name": "CMake",
+      "default": true
+    },
+    {
+      "id": "ninja",
+      "name": "Ninja",
+      "default": true
+    },
+    {
+      "id": "dotnet",
+      "name": "Microsoft .NET SDK 10",
+      "default": true
+    },
+    {
+      "id": "kotlin",
+      "name": "Kotlin compiler",
+      "default": true
+    },
+    {
+      "id": "scala",
+      "name": "Scala CLI",
+      "default": true
+    },
+    {
+      "id": "groovy",
+      "name": "Apache Groovy",
+      "default": true
+    },
+    {
+      "id": "php",
+      "name": "PHP 8.5",
+      "default": true
+    },
+    {
+      "id": "lua",
+      "name": "Lua",
+      "default": true
+    },
+    {
+      "id": "pwsh",
+      "name": "PowerShell 7",
+      "default": true
+    },
+    {
+      "id": "sqlite",
+      "name": "SQLite",
+      "default": true
+    },
+    {
+      "id": "r",
+      "name": "R",
+      "default": true
+    },
+    {
+      "id": "julia",
+      "name": "Julia",
+      "default": true
+    },
+    {
+      "id": "pydata",
+      "name": "Python data science (pip)",
+      "default": true
+    },
+    {
+      "id": "erlang",
+      "name": "Erlang/OTP",
+      "default": true
+    },
+    {
+      "id": "elixir",
+      "name": "Elixir",
+      "default": true
+    },
+    {
+      "id": "racket",
+      "name": "Racket (Lisp/Scheme)",
+      "default": true
+    },
+    {
+      "id": "ocaml",
+      "name": "OCaml (opam)",
+      "default": true
+    },
+    {
+      "id": "pascal",
+      "name": "Free Pascal",
+      "default": true
+    },
+    {
+      "id": "rstudio",
+      "name": "RStudio",
+      "default": false
+    },
+    {
+      "id": "androidstudio",
+      "name": "Android Studio",
+      "default": false
+    },
+    {
+      "id": "docker",
+      "name": "Docker Desktop",
+      "default": false
+    }
+  ]
+}

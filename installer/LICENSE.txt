@@ -1,0 +1,22 @@
+AI Dev Transfer 1.0.0
+Copyright (c) 2026. Provided as-is, without warranty.
+
+This installer is a personal migration helper. It downloads third-party
+software and AI models from their official sources. Those components remain
+under their own licenses and terms:
+
+- Ollama: MIT
+- Models: each model's own license (Gemma Terms, Apache-2.0, MIT, etc.)
+- Python: PSF License
+- Node.js: MIT
+- Git: GPL-2.0
+- uv: MIT/Apache-2.0
+- Temurin JDK: GPL-2.0 with Classpath Exception
+- Flutter/Dart: BSD-3-Clause
+- Ruby: Ruby License / BSD-2-Clause
+- Strawberry Perl: Perl Artistic License / GPL
+- LLVM: Apache-2.0 with LLVM Exceptions
+- MCP servers: MIT (reference servers)
+
+You are responsible for reviewing and complying with each license.
+No API keys, credentials, personal files, or project data are included.
