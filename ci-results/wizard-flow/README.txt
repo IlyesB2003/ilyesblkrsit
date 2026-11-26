@@ -8,7 +8,7 @@ Ollama models:
 C:\Users\runneradmin
 \.ollama
 Log: 
-C:\Users\runneradmin\AppData\Local\AI-Dev-Transfer\logs\install-20261126-094734.log
+C:\Users\runneradmin\AppData\Local\AI-Dev-Transfer\logs\install-20261126-095100.log
 
 Open the wizard again from: 
 C:\Users\runneradmin\AppData\Local\AI-Dev-Transfer\bootstrap\wizard.hta
