@@ -1,0 +1,70 @@
+﻿AI Dev Transfer log - 2026-11-26T09:47:34.2751070+00:00
+[09:47:34] [INFO] Installer started.
+[09:47:37] [INFO] Preflight: Windows 10.0.26100.0, free 29.8 GB, required about 6.5 GB
+[09:47:37] [INFO] winget found: C:\Users\runneradmin\AppData\Local\Microsoft\WindowsApps\winget.exe
+[09:47:44] [INFO] winget install DEVCOM.Lua
+[09:47:50] [INFO] winget:    - 
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  1024 KB / 3.89 MB
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  2.00 MB / 3.89 MB
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  3.00 MB / 3.89 MB
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  3.89 MB / 3.89 MB
+[09:47:50] [INFO] winget:   ΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  0%
+[09:47:50] [INFO] winget:   ΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  0%
+[09:47:50] [INFO] winget:   ΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  1%
+[09:47:50] [INFO] winget:   ΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  2%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  66%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆΓûÆ  76%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆΓûÆΓûÆ  84%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆ  93%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÆΓûÆΓûÆ  93%
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  100%
+[09:47:50] [INFO] winget: The `msstore` source requires that you view the following agreements before using.
+[09:47:50] [INFO] winget: Terms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction
+[09:47:50] [INFO] winget: The source requires the current machine's 2-letter geographic region to be sent to the backend service to function properly (ex. "US").
+[09:47:50] [INFO] winget:    - 
+[09:47:50] [INFO] winget: Found Lua [DEVCOM.Lua] Version 5.4.6
+[09:47:50] [INFO] winget: This application is licensed to you by its owner.
+[09:47:50] [INFO] winget: Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+[09:47:50] [INFO] winget: Downloading https://github.com/DevelopersCommunity/cmake-lua/releases/download/v5.4.6/Lua-5.4.6-win64.msi
+[09:47:50] [INFO] winget:    - 
+[09:47:50] [INFO] winget:    \ 
+[09:47:50] [INFO] winget:    | 
+[09:47:50] [INFO] winget:    / 
+[09:47:50] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  4.64 MB / 4.64 MB
+[09:47:50] [INFO] winget: Successfully verified installer hash
+[09:47:50] [INFO] winget: Starting package install...
+[09:47:50] [INFO] winget:    - 
+[09:47:50] [INFO] winget:    \ 
+[09:47:50] [INFO] winget:    | 
+[09:47:50] [INFO] winget:    / 
+[09:47:50] [INFO] winget:    - 
+[09:47:50] [INFO] winget:    \ 
+[09:47:50] [INFO] winget: Successfully installed
+[09:47:50] [INFO] winget exit code: 0
+[09:47:50] [INFO] Lua installed.
+[09:47:50] [INFO] winget install SQLite.SQLite
+[09:47:54] [INFO] winget:    - 
+[09:47:54] [INFO] winget:    - 
+[09:47:54] [INFO] winget: Found SQLite [SQLite.SQLite] Version 3.54.1
+[09:47:54] [INFO] winget: This application is licensed to you by its owner.
+[09:47:54] [INFO] winget: Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+[09:47:54] [INFO] winget: Downloading https://www.sqlite.org/2026/sqlite-tools-win-x64-3540100.zip
+[09:47:54] [INFO] winget:    - 
+[09:47:54] [INFO] winget:    \ 
+[09:47:54] [INFO] winget:    | 
+[09:47:54] [INFO] winget:   ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  6.66 MB / 6.66 MB
+[09:47:54] [INFO] winget: Successfully verified installer hash
+[09:47:54] [INFO] winget: Extracting archive...
+[09:47:54] [INFO] winget: Successfully extracted archive
+[09:47:54] [INFO] winget: Starting package install...
+[09:47:54] [INFO] winget: Command line alias added: "sqldiff"
+[09:47:54] [INFO] winget: Command line alias added: "sqlite3"
+[09:47:54] [INFO] winget: Command line alias added: "sqlite3_analyzer"
+[09:47:54] [INFO] winget: Command line alias added: "sqlite3_rsync"
+[09:47:54] [INFO] winget: Path environment variable modified; restart your shell to use the new value.
+[09:47:54] [INFO] winget: Successfully installed
+[09:47:54] [INFO] winget exit code: 0
+[09:47:54] [INFO] SQLite installed.
+[09:47:54] [INFO] Verified Lua: found
+[09:47:54] [INFO] Verified SQLite: 3.54.1 2026-10-16 14:45:20 555e07ef33f69a0957d24d8e555b702464a131d6f1607f4c3c1e4551e8e6ca76 (64-bit)
+[09:47:54] [INFO] Installation completed successfully.
