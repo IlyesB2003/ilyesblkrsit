@@ -1,4 +1,4 @@
-param([string]$Name, [string]$Components, [int]$TimeoutMinutes = 320)
+param([string]$Name, [string]$Components, [int]$TimeoutMinutes = 30)
 # End-to-end test: run the real Setup.exe, let the wizard click through its own pages
 # (autotest mode), install the chosen components, then collect logs and screenshots.
 $ErrorActionPreference = 'Continue'

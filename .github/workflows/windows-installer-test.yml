@@ -40,17 +40,13 @@ jobs:
   install:
     name: Install - ${{ matrix.name }}
     runs-on: windows-latest
-    timeout-minutes: 340
+    timeout-minutes: 45
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: web-systems-jvm
-            components: "python,node,git,uv,java,vscode,webpack,bun,deno,mingw,go,rust,zig,nim,cmake,ninja,gcc,dotnet,kotlin,scala,groovy,gradle,maven,clojure,mcp"
-          - name: scripting-data-mobile
-            components: "python,git,java,ruby,perl,php,lua,pwsh,sqlite,r,julia,pydata,erlang,elixir,racket,ocaml,pascal,haskell,flutter"
-          - name: ollama-models-mcp
-            components: "ollama,embeddinggemma:latest,qwen3:4b,python,node,uv,mcp"
+          - name: wizard-flow
+            components: "sqlite,lua"
     steps:
       - uses: actions/checkout@v4
       - name: Run Setup.exe and click through the wizard
