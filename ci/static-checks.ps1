@@ -29,7 +29,7 @@ Out-Line ("WINGET: {0} found, {1} missing" -f $good, $bad)
 
 # Run the real setup exe the way a user does, and confirm the wizard window opens.
 $exe = Join-Path $root 'installer\AI-Dev-Transfer-Setup.exe'
-Start-Process -FilePath $exe -Wait
+$sp = Start-Process -FilePath $exe -PassThru; $null = $sp.WaitForExit(120000); Write-Host "Setup.exe exit code: $($sp.ExitCode)"
 Start-Sleep -Seconds 8
 $boot = Join-Path $env:LOCALAPPDATA 'AI-Dev-Transfer\bootstrap'
 foreach ($f in @('wizard.hta', 'install.ps1', 'manifest.json', 'assets\app.ico', 'docs\README_AR.txt')) {

@@ -15,7 +15,7 @@ Ensure-Winget
 [System.IO.File]::WriteAllText((Join-Path $appRoot 'autotest.txt'), $Components)
 $exe = Join-Path $root 'installer\AI-Dev-Transfer-Setup.exe'
 $start = Get-Date
-Start-Process -FilePath $exe -Wait
+$sp = Start-Process -FilePath $exe -PassThru; $null = $sp.WaitForExit(120000); Write-Host "Setup.exe exit code: $($sp.ExitCode)"
 foreach ($t in @(3, 7, 11, 14, 17, 22, 30, 45)) {
     while (((Get-Date) - $start).TotalSeconds -lt $t) { Start-Sleep -Milliseconds 300 }
     Save-Screenshot (Join-Path $res ("wizard-{0:D2}s.png" -f $t))
