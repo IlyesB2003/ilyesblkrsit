@@ -25,16 +25,14 @@ body {
     color: #0f172a;
     font-size: 14px;
 }
-.app { display: table; width: 100%; height: 100%; table-layout: fixed; }
+.app { position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; }
 .sidebar {
-    display: table-cell;
+    position: absolute; top: 0; right: 0; bottom: 0;
     width: 248px;
-    height: 100%;
     padding: 26px 20px 22px 20px;
     vertical-align: top;
     color: #e6f6ff;
     background: linear-gradient(165deg, #07111f 0%, #0b2b3a 58%, #0e7490 100%);
-    position: relative;
     overflow: hidden;
 }
 .sidebar .glow {
@@ -88,7 +86,7 @@ body {
     z-index: 2;
 }
 .side-foot b { color: #bdeaf4; font-weight: 600; }
-.main { display: table-cell; height: 100%; vertical-align: top; background: #f4f7fb; position: relative; }
+.main { position: absolute; top: 0; bottom: 0; left: 0; right: 248px; background: #f4f7fb; overflow: hidden; }
 .topbar {
     position: absolute; top: 0; right: 0; left: 0; height: 58px;
     background: #ffffff;
