@@ -26,6 +26,16 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: results-static, path: results/ }
+      - name: Save results to branch
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p ci-results && cp -r results/* ci-results/ 2>/dev/null || true
+          git config user.name "installer-test-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add ci-results
+          git commit -m "Windows test results: static (run ${GITHUB_RUN_NUMBER}) [skip ci]" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin windows-installer-test && git push origin HEAD:windows-installer-test && break; sleep $((i*7)); done
 
   install:
     name: Install - ${{ matrix.name }}
@@ -49,28 +59,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: "results-${{ matrix.name }}", path: results/ }
-
-  report:
-    name: Save report to branch
-    needs: [static, install]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with: { path: artifacts, pattern: results-*, merge-multiple: true }
-      - name: Commit results
+      - name: Save results to branch
+        if: always()
+        shell: bash
         run: |
-          rm -rf ci-results && mkdir -p ci-results && cp -r artifacts/* ci-results/ || true
-          {
-            echo "# Windows installer test - run ${GITHUB_RUN_NUMBER}"
-            echo "Commit: ${GITHUB_SHA}  |  $(date -u)"
-            echo
-            for f in ci-results/static/static.md ci-results/*/summary.md; do [ -f "$f" ] && cat "$f" && echo; done
-          } > ci-results/REPORT.md
+          mkdir -p ci-results && cp -r results/* ci-results/ 2>/dev/null || true
           git config user.name "installer-test-bot"
           git config user.email "actions@users.noreply.github.com"
           git add ci-results
-          git commit -m "Windows test results run ${GITHUB_RUN_NUMBER} [skip ci]" || exit 0
-          git pull --rebase origin windows-installer-test || true
-          git push origin HEAD:windows-installer-test
+          git commit -m "Windows test results: ${{ matrix.name }} (run ${GITHUB_RUN_NUMBER}) [skip ci]" || exit 0
+          for i in 1 2 3 4 5; do git pull --rebase -X theirs origin windows-installer-test && git push origin HEAD:windows-installer-test && break; sleep $((i*7)); done
